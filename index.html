@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyWallet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://kit.fontawesome.com/fbdeb8aea2.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+        <div class="panel">
+            <div class="panel-info">
+                <div class="panel-info__header">
+                    <h1 class="panel-info__header-heading">MyWallet</h1>
+                    <p class="panel-info__header-text">Your personal finance manager</p>
+                </div>
+                <div class="panel-info__money">
+                    <div class="panel-info__money-available">
+                        <h2 class="panel-info__money-available-heading">Available Money</h2>
+                        <p class="panel-info__money-available-amount">0zł</p>
+                    </div>
+                    <div class="panel-info__money-flows">
+                        <div class="panel-info__money-flows-income">
+                            <h3 class="panel-info__money-flows-income-heading">Income</h3>
+                            <p class="panel-info__money-flows-income-amount">100zł</p>
+                        </div>
+                        <div class="panel-info__money-flows-expense">
+                            <h3 class="panel-info__money-flows-expense-heading">Expense</h3>
+                            <p class="panel-info__money-flows-expense-amount">200zł</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="panel-transactions">
+                <h2 class="panel-transactions__heading">Transaction list</h2>
+                <div class="panel-transactions__list">
+                    <div class="panel-transactions__list-transaction">
+                        <p class="panel-transactions__list-transaction-name">Wypłata</p>
+                        <p class="panel-transactions__list-transaction-amount">5500zł <button
+                                class="panel-transactions__list-transaction-deleteBtn"></button></p>
+
+                    </div>
+                </div>
+                <div class="panel-transactions__controls">
+                    <button class="panel-transactions__controls-add">Add transaction</button>
+                    <button class="panel-transactions__controls-deleteAllBtn">Delete all</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="popup">
+        <div class="popup__form">
+            <h2 class="popup__form-heading">Add new transaction</h2>
+
+            <label for="name">Name:</label>
+            <small>(enter a name of transaction)</small>
+            <input type="text" id="name">
+
+            <label for="amount">Amount:</label>
+            <small>(enter an amount of transaction)</small>
+            <input type="text" id="amount">
+
+            <label for="category">Choose a category:</label>
+            <small>([ + ] means income, [ - ] means expense)</small>
+            <select id="category">
+                <option value="none">-- Choose an option --</option>
+                <option value="income">[+] Income</option>
+                <option value="income">[-] Bills</option>
+                <option value="income">[-] Food</option>
+                <option value="income">[-] Fuel and tickets</option>
+                <option value="income">[-] Entertainment</option>
+                <option value="income">[-] other</option>
+            </select>
+
+            <div class="popup__controls">
+                <button class="popup__controls-save">Save</button>
+                <button class="popup__controls-cancel">Cancel</button>
+            </div>
+        </div>
+        
+
+    </div>
+
+
+</body>
+
+</html>

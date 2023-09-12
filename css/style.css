@@ -113,15 +113,30 @@ h3 {
   font-style: inherit;
   width: 50%;
   height: 3.5em;
-  margin: 1em;
+  margin: 1em 0.5em;
   padding: 0.5em 1em;
   border-radius: 0.4em;
+}
+.panel-transactions__controls-add {
+  background-color: #2a9d8f;
+  border: 1px solid #2a9d8f;
+  color: #fff;
+  transition: background-color 0.3s;
+}
+.panel-transactions__controls-delete-all {
+  background-color: #fff;
   border: 1px solid #2a9d8f;
   color: #000;
-  background-color: #f7ffff;
+  transition: background-color 0.3s;
+}
+.panel-transactions__controls-add:hover, .panel-transactions__controls-delete-all:hover {
+  background-color: #264653;
+  border: 1px solid #264653;
+  color: #fff;
 }
 
 .popup {
+  display: none;
   position: absolute;
   top: 0;
   right: 0;
@@ -183,4 +198,13 @@ h3 {
   background: none;
   color: #000;
   border: 1px solid #000;
+}
+
+@media (min-width: 576px) {
+  .panel-transactions__controls button {
+    margin: 2em;
+  }
+  .panel-info__money-available-amount {
+    font-size: 3rem;
+  }
 }/*# sourceMappingURL=style.css.map */

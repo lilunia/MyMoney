@@ -112,17 +112,33 @@ h3 {
 				font-style: inherit;
 				width: 50%;
 				height: 3.5em;
-				margin: 1em;
+				margin: 1em 0.5em;
 				padding: 0.5em 1em;
 				border-radius: 0.4em;
+			}
+			&-add {
+				background-color: #2a9d8f;
+				border: 1px solid #2a9d8f;
+				color: #fff;
+				transition: background-color 0.3s;
+			}
+			&-delete-all {
+				background-color: #fff;
 				border: 1px solid #2a9d8f;
 				color: #000;
-				background-color: #f7ffff;
+				transition: background-color 0.3s;
+			}
+			&-add:hover,
+			&-delete-all:hover {
+				background-color: #264653;
+				border: 1px solid #264653;
+				color: #fff;
 			}
 		}
 	}
 }
 .popup {
+	display: none;
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -189,3 +205,31 @@ h3 {
 		}
 	}
 }
+
+// @media (min-width: 320px) {
+// }
+@media (min-width: 576px) {
+	.panel {
+		&-transactions {
+			&__controls {
+				button {
+					margin: 2em;
+				}
+			}
+		}
+		&-info {
+			&__money {
+				&-available {
+					&-amount {
+						font-size: 3rem;
+					}
+				}
+			}
+		}
+	}
+}
+
+// @media (min-width: 992px) {
+// }
+// @media (min-width: 1200px) {
+// }

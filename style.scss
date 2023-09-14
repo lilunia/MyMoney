@@ -15,6 +15,7 @@ body {
 	transform: translate(-50%, -50%);
 	margin: 0 auto;
 	width: 100%;
+	height: 100%;
 	max-width: 1200px;
 }
 h2,
@@ -23,7 +24,7 @@ h3 {
 	text-transform: uppercase;
 }
 h2 {
-	font-size: 1.5rem;
+	font-size: 1.2rem;
 }
 h3 {
 	font-size: 1rem;
@@ -38,6 +39,10 @@ h3 {
 	margin-left: 0.5em;
 	height: 1.2em;
 	width: 1.2em;
+}
+.wallet-icon {
+	height: 1.5em;
+	width: 1.5em;
 }
 
 .panel {
@@ -61,8 +66,11 @@ h3 {
 			background-color: #f4a261;
 			border-radius: 1em;
 			&-heading {
-				font-size: 2rem;
+				display: flex;
+				justify-content: center;
+				align-items: center;
 				margin-bottom: 0.4em;
+				font-size: 1.5rem;
 			}
 			&-text {
 				font-size: 1rem;
@@ -73,7 +81,7 @@ h3 {
 			color: #fff;
 			&-available {
 				padding: 0.5em;
-				margin-bottom: 2em;
+				margin-bottom: .5em;
 
 				&-heading {
 					margin-bottom: 0.5em;
@@ -108,7 +116,7 @@ h3 {
 		border: 0.1em solid #2a9d8f;
 		background-color: #fff;
 		&__heading {
-			margin: 1em 0;
+			margin: .3em 0;
 		}
 		&__list {
 			margin: 2em 0;
@@ -183,7 +191,7 @@ h3 {
 	}
 }
 .popup {
-	display: block;
+	display: none;
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -281,6 +289,11 @@ h3 {
 					}
 				}
 			}
+			&__header {
+				&-heading {
+					font-size: 2rem;
+				}
+			}
 		}
 	}
 }
@@ -315,9 +328,8 @@ h3 {
 			}
 		}
 	}
-	.popup{
+	.popup {
 		label {
-			
 			font-size: 1.5em;
 		}
 		small {
@@ -325,10 +337,9 @@ h3 {
 		}
 		input,
 		select {
-			padding: .8em;
+			padding: 0.8em;
 			font-size: 1rem;
 		}
-	
 	}
 }
 @media (min-width: 992px) {

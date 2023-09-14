@@ -170,6 +170,7 @@ h3 {
   background-color: #2a9d8f;
   border: 1px solid #2a9d8f;
   color: #fff;
+  cursor: pointer;
   transition: background-color 0.3s;
 }
 .panel-transactions__controls-delete-all {
@@ -179,6 +180,7 @@ h3 {
   background-color: #fff;
   border: 1px solid #2a9d8f;
   color: #000;
+  cursor: pointer;
   transition: background-color 0.3s;
 }
 .panel-transactions__controls-add:hover, .panel-transactions__controls-delete-all:hover {
@@ -188,7 +190,7 @@ h3 {
 }
 
 .popup {
-  display: none;
+  display: block;
   position: absolute;
   top: 0;
   right: 0;
@@ -247,6 +249,7 @@ h3 {
   background-color: #2a9d8f;
   color: #fff;
   border: 1px solid transparent;
+  cursor: pointer;
   transition: background-color 0.3s;
 }
 .popup__controls-save:hover {
@@ -256,6 +259,7 @@ h3 {
   background: none;
   color: #000;
   border: 1px solid #000;
+  cursor: pointer;
   transition: background-color 0.3s;
 }
 .popup__controls-cancel:hover {

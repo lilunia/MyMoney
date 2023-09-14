@@ -81,7 +81,7 @@ h3 {
 			color: #fff;
 			&-available {
 				padding: 0.5em;
-				margin-bottom: .5em;
+				margin-bottom: 0.5em;
 
 				&-heading {
 					margin-bottom: 0.5em;
@@ -116,7 +116,7 @@ h3 {
 		border: 0.1em solid #2a9d8f;
 		background-color: #fff;
 		&__heading {
-			margin: .3em 0;
+			margin: 0.3em 0;
 		}
 		&__list {
 			margin: 2em 0;
@@ -170,6 +170,7 @@ h3 {
 				background-color: #2a9d8f;
 				border: 1px solid #2a9d8f;
 				color: #fff;
+				cursor: pointer;
 				transition: background-color 0.3s;
 			}
 			&-delete-all {
@@ -179,6 +180,7 @@ h3 {
 				background-color: #fff;
 				border: 1px solid #2a9d8f;
 				color: #000;
+				cursor: pointer;
 				transition: background-color 0.3s;
 			}
 			&-add:hover,
@@ -191,7 +193,7 @@ h3 {
 	}
 }
 .popup {
-	display: none;
+	display: block;
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -252,6 +254,7 @@ h3 {
 			background-color: #2a9d8f;
 			color: #fff;
 			border: 1px solid transparent;
+			cursor: pointer;
 			transition: background-color 0.3s;
 		}
 		&-save:hover {
@@ -261,6 +264,7 @@ h3 {
 			background: none;
 			color: #000;
 			border: 1px solid #000;
+			cursor: pointer;
 			transition: background-color 0.3s;
 		}
 		&-cancel:hover {
@@ -270,8 +274,7 @@ h3 {
 	}
 }
 
-// @media (min-width: 320px) {
-// }
+// MEDIA
 @media (min-width: 576px) {
 	.panel {
 		&-transactions {

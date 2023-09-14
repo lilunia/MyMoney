@@ -10,6 +10,10 @@ body {
 }
 
 .wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   margin: 0 auto;
   width: 100%;
   max-width: 1200px;
@@ -27,6 +31,17 @@ h2 {
 
 h3 {
   font-size: 1rem;
+}
+
+.x-icon,
+.add-icon,
+.delete-all-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 0.5em;
+  height: 1.2em;
+  width: 1.2em;
 }
 
 .panel {
@@ -103,6 +118,22 @@ h3 {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1em;
+  font-size: 1rem;
+}
+.panel-transactions__list-transaction-amount {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.panel-transactions__list-transaction-deleteBtn {
+  padding: 0.5em;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+.panel-transactions__list-transaction-deleteBtn:hover {
+  transform: scale(0.8);
 }
 .panel-transactions__controls {
   display: flex;
@@ -117,13 +148,25 @@ h3 {
   padding: 0.5em 1em;
   border-radius: 0.4em;
 }
+.panel-transactions__controls button img {
+  height: 40%;
+}
+.panel-transactions__controls button img .plus-img {
+  background-color: #fff;
+}
 .panel-transactions__controls-add {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #2a9d8f;
   border: 1px solid #2a9d8f;
   color: #fff;
   transition: background-color 0.3s;
 }
 .panel-transactions__controls-delete-all {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #fff;
   border: 1px solid #2a9d8f;
   color: #000;
@@ -136,7 +179,7 @@ h3 {
 }
 
 .popup {
-  display: none;
+  display: block;
   position: absolute;
   top: 0;
   right: 0;
@@ -156,22 +199,23 @@ h3 {
   text-align: center;
   width: 90%;
   max-width: 800px;
-  padding: 3em 1em;
+  padding: 2em 1em;
   background-color: #f4a261;
   border-radius: 1em;
 }
 .popup__form-heading {
-  margin-bottom: 0.5em;
+  margin-bottom: 1em;
 }
 .popup__form label {
+  margin-bottom: 0.5em;
   font-size: 1.2em;
 }
 .popup__form small {
-  font-size: 0.7em;
+  font-size: 0.8em;
 }
 .popup__form input,
 .popup__form select {
-  padding: 0.3em 1em;
+  padding: 0.6em 1em;
   margin: 1em 2em;
   width: 90%;
   border-radius: 0.5em;
@@ -188,16 +232,26 @@ h3 {
   margin: 1em;
   width: 50%;
   border-radius: 0.5em;
+  font-size: 1rem;
 }
 .popup__controls-save {
   background-color: #2a9d8f;
   color: #fff;
   border: 1px solid transparent;
+  transition: background-color 0.3s;
+}
+.popup__controls-save:hover {
+  background-color: #264653;
 }
 .popup__controls-cancel {
   background: none;
   color: #000;
   border: 1px solid #000;
+  transition: background-color 0.3s;
+}
+.popup__controls-cancel:hover {
+  background: #fff;
+  border: 1px solid transparent;
 }
 
 @media (min-width: 576px) {
@@ -206,5 +260,50 @@ h3 {
   }
   .panel-info__money-available-amount {
     font-size: 3rem;
+  }
+}
+@media (min-width: 768px) {
+  .x-icon,
+  .add-icon,
+  .delete-all-icon {
+    height: 1.8em;
+    width: 1.8em;
+  }
+  .panel-transactions__controls button {
+    font-size: 1.2rem;
+  }
+  .panel-transactions__list-transaction {
+    font-size: 1.4rem;
+  }
+  .panel-info__money-available-amount {
+    font-size: 3rem;
+  }
+  .popup label {
+    font-size: 1.5em;
+  }
+  .popup small {
+    font-size: 1em;
+  }
+  .popup input,
+  .popup select {
+    padding: 0.8em;
+    font-size: 1rem;
+  }
+}
+@media (min-width: 992px) {
+  h2 {
+    font-size: 1.8rem;
+  }
+  h3 {
+    font-size: 1.3rem;
+  }
+  .panel-info__money-available-amount {
+    font-size: 4rem;
+  }
+  .panel-info__money-flows-income-heading, .panel-info__money-flows-expense-heading {
+    margin-bottom: 1em;
+  }
+  .panel-info__money-flows-income-amount, .panel-info__money-flows-expense-amount {
+    font-size: 2rem;
   }
 }/*# sourceMappingURL=style.css.map */

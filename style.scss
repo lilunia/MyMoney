@@ -3,11 +3,16 @@
 	margin: 0;
 	padding: 0;
 }
+
 body {
 	font-family: 'Montserrat', sans-serif;
 	background-color: rgba(244, 162, 97, 0.6);
 }
 .wrapper {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	margin: 0 auto;
 	width: 100%;
 	max-width: 1200px;
@@ -23,6 +28,18 @@ h2 {
 h3 {
 	font-size: 1rem;
 }
+
+.x-icon,
+.add-icon,
+.delete-all-icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-left: 0.5em;
+	height: 1.2em;
+	width: 1.2em;
+}
+
 .panel {
 	display: flex;
 	justify-content: center;
@@ -100,6 +117,22 @@ h3 {
 				justify-content: space-between;
 				align-items: center;
 				margin-bottom: 1em;
+				font-size: 1rem;
+				&-amount {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+				}
+				&-deleteBtn {
+					padding: 0.5em;
+					border: none;
+					background: none;
+					cursor: pointer;
+					transition: transform 0.3s;
+				}
+				&-deleteBtn:hover {
+					transform: scale(0.8);
+				}
 			}
 		}
 
@@ -115,14 +148,26 @@ h3 {
 				margin: 1em 0.5em;
 				padding: 0.5em 1em;
 				border-radius: 0.4em;
+				img {
+					height: 40%;
+					.plus-img {
+						background-color: #fff;
+					}
+				}
 			}
 			&-add {
+				display: flex;
+				justify-content: center;
+				align-items: center;
 				background-color: #2a9d8f;
 				border: 1px solid #2a9d8f;
 				color: #fff;
 				transition: background-color 0.3s;
 			}
 			&-delete-all {
+				display: flex;
+				justify-content: center;
+				align-items: center;
 				background-color: #fff;
 				border: 1px solid #2a9d8f;
 				color: #000;
@@ -138,7 +183,7 @@ h3 {
 	}
 }
 .popup {
-	display: none;
+	display: block;
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -158,22 +203,23 @@ h3 {
 		text-align: center;
 		width: 90%;
 		max-width: 800px;
-		padding: 3em 1em;
+		padding: 2em 1em;
 		background-color: #f4a261;
 		border-radius: 1em;
 
 		&-heading {
-			margin-bottom: 0.5em;
+			margin-bottom: 1em;
 		}
 		label {
+			margin-bottom: 0.5em;
 			font-size: 1.2em;
 		}
 		small {
-			font-size: 0.7em;
+			font-size: 0.8em;
 		}
 		input,
 		select {
-			padding: 0.3em 1em;
+			padding: 0.6em 1em;
 			margin: 1em 2em;
 			width: 90%;
 			border-radius: 0.5em;
@@ -191,17 +237,27 @@ h3 {
 			margin: 1em;
 			width: 50%;
 			border-radius: 0.5em;
+			font-size: 1rem;
 		}
 
 		&-save {
 			background-color: #2a9d8f;
 			color: #fff;
 			border: 1px solid transparent;
+			transition: background-color 0.3s;
+		}
+		&-save:hover {
+			background-color: #264653;
 		}
 		&-cancel {
 			background: none;
 			color: #000;
 			border: 1px solid #000;
+			transition: background-color 0.3s;
+		}
+		&-cancel:hover {
+			background: #fff;
+			border: 1px solid transparent;
 		}
 	}
 }
@@ -228,8 +284,81 @@ h3 {
 		}
 	}
 }
+@media (min-width: 768px) {
+	.x-icon,
+	.add-icon,
+	.delete-all-icon {
+		height: 1.8em;
+		width: 1.8em;
+	}
+	.panel {
+		&-transactions {
+			&__controls {
+				button {
+					font-size: 1.2rem;
+				}
+			}
 
-// @media (min-width: 992px) {
-// }
-// @media (min-width: 1200px) {
-// }
+			&__list {
+				&-transaction {
+					font-size: 1.4rem;
+				}
+			}
+		}
+		&-info {
+			&__money {
+				&-available {
+					&-amount {
+						font-size: 3rem;
+					}
+				}
+			}
+		}
+	}
+	.popup{
+		label {
+			
+			font-size: 1.5em;
+		}
+		small {
+			font-size: 1em;
+		}
+		input,
+		select {
+			padding: .8em;
+			font-size: 1rem;
+		}
+	
+	}
+}
+@media (min-width: 992px) {
+	h2 {
+		font-size: 1.8rem;
+	}
+	h3 {
+		font-size: 1.3rem;
+	}
+	.panel {
+		&-info {
+			&__money {
+				&-available {
+					&-amount {
+						font-size: 4rem;
+					}
+				}
+
+				&-flows {
+					&-income,
+					&-expense {
+						&-heading {
+							margin-bottom: 1em;
+						}
+						&-amount {
+							font-size: 2rem;
+						}
+					}
+				}
+			}
+		}
+	}
+}

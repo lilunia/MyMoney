@@ -45,6 +45,10 @@ h3 {
   width: 1.2em;
 }
 
+.transaction-icon {
+  margin: 0.35em 0.5em 0;
+}
+
 .wallet-icon {
   height: 1.5em;
   width: 1.5em;
@@ -129,7 +133,7 @@ h3 {
   margin-bottom: 1em;
   font-size: 1rem;
 }
-.panel-transactions__list-transaction-amount {
+.panel-transactions__list-transaction-name, .panel-transactions__list-transaction-amount {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -187,6 +191,10 @@ h3 {
   background-color: #264653;
   border: 1px solid #264653;
   color: #fff;
+}
+
+.income {
+  color: green;
 }
 
 .popup {
@@ -265,6 +273,16 @@ h3 {
 .popup__controls-cancel:hover {
   background: #fff;
   border: 1px solid transparent;
+}
+
+.error-value,
+.error-fields {
+  margin-bottom: 1em;
+  color: red;
+}
+
+.error {
+  box-shadow: 0 0 0.5em red;
 }
 
 @media (min-width: 576px) {

@@ -40,6 +40,9 @@ h3 {
 	height: 1.2em;
 	width: 1.2em;
 }
+.transaction-icon {
+	margin: 0.35em 0.5em 0;
+}
 .wallet-icon {
 	height: 1.5em;
 	width: 1.5em;
@@ -126,6 +129,7 @@ h3 {
 				align-items: center;
 				margin-bottom: 1em;
 				font-size: 1rem;
+				&-name,
 				&-amount {
 					display: flex;
 					justify-content: center;
@@ -191,6 +195,9 @@ h3 {
 			}
 		}
 	}
+}
+.income {
+	color: green;
 }
 .popup {
 	display: none;
@@ -272,6 +279,14 @@ h3 {
 			border: 1px solid transparent;
 		}
 	}
+}
+.error-value,
+.error-fields {
+	margin-bottom: 1em;
+	color: red;
+}
+.error {
+	box-shadow: 0 0 0.5em red;
 }
 
 // MEDIA

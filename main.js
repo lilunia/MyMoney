@@ -12,8 +12,9 @@ const amountInput = document.querySelector('#amount')
 const category = document.querySelector('#category')
 
 const popup = document.querySelector('.popup')
+const errorName = document.querySelector('.error-name')
 const errorValue = document.querySelector('.error-value')
-const errorFields = document.querySelector('.error-fields')
+const errorCategory = document.querySelector('.error-category')
 const saveBtn = document.querySelector('.popup__controls-save')
 const cancelBtn = document.querySelector('.popup__controls-cancel')
 
@@ -29,41 +30,39 @@ const openPopup = () => {
 	popup.style.display = 'block'
 }
 const closePopup = () => {
-	popup.style.display = 'none'
 	nameInput.value = ''
 	amountInput.value = ''
-	errorFields.textContent = ''
-	errorValue.textContent = ''
 	category.value = 'none'
+	errorName.textContent = ''
+	errorValue.textContent = ''
+	errorCategory.textContent = ''
+	nameInput.classList.remove('error')
+	amountInput.classList.remove('error')
+	category.classList.remove('error')
+	popup.style.display = 'none'
 }
 
 const addNewTransaction = () => {
-	const re = /^[0-9]*.[0-9]{0,2}?$/
-	nameInput.classList.remove('error')
-	category.classList.remove('error')
-	amountInput.classList.remove('error')
-	if (
-		nameInput.value.trim() !== '' &&
-		amountInput.value !== '' &&
-		amountInput.value >= 0.01 &&
-		category.value !== 'none' &&
-		re.test(amountInput.value)
-	) {
-		errorFields.textContent = ''
-		errorValue.textContent = ''
-		nameInput.classList.remove('error')
-		category.classList.remove('error')
+	errorCategory.textContent = ''
+
+	if (nameInput.value.trim() !== '' && amountInput.value !== '' && category.value !== 'none') {
+		checkAmount()
+	} else {
+		errorCategory.textContent = 'Fill in all fields!'
+	}
+}
+
+const checkAmount = () => {
+	// const re = /(^([^0][0-9]+))|(^0?).[0-9]{0,2}$/
+	const re = /(^[^0][0-9]*)|(^0?).[0-9]{0,2}$/
+	if (amountInput.value >= 0.01 && re.test(amountInput.value)) {
 		amountInput.classList.remove('error')
+		errorValue.textContent = ''
 		createNewTransaction()
 		closePopup()
-	} else if (nameInput.value === '' || category.value === 'none') {
-		errorFields.textContent = 'Fill in all fields!'
-		nameInput.classList.add('error')
-		category.classList.add('error')
 	} else {
-		errorValue.textContent = 'Enter the correct value!'
 		amountInput.classList.add('error')
-		console.log(amountInput.value)
+		errorValue.textContent = 'Please enter the correct value!'
 	}
 }
 
@@ -74,7 +73,7 @@ const createNewTransaction = () => {
 	addIcon(selectedCategory)
 	newTransaction.innerHTML = `
 	<p class="panel-transactions__list-transaction-name">${categoryIcon}${nameInput.value}</p>
-	<p class="panel-transactions__list-transaction-amount">${amountInput.value}zł 
+	<p class="panel-transactions__list-transaction-amount">${parseFloat(amountInput.value).toFixed(2)}zł 
 		<button class="panel-transactions__list-transaction-deleteBtn"  onclick="deleteTransaction(${id})">
 			<span class="x-icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 					viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2"
@@ -169,9 +168,9 @@ const addIcon = selectedCategory => {
 	}
 }
 const countMoney = (money, income, expense) => {
-	const sum = money.reduce((x, y) => x + y)
-	const sumIncome = income.reduce((x, y) => x + y)
-	const sumExpense = expense.reduce((x, y) => x + y)
+	const sum = money.reduce((x, y) => x + y).toFixed(2)
+	const sumIncome = income.reduce((x, y) => x + y).toFixed(2)
+	const sumExpense = expense.reduce((x, y) => x + y).toFixed(2)
 
 	availableMoney.textContent = `${sum}zł`
 	incomeAmount.textContent = `${sumIncome}zł`
@@ -180,7 +179,7 @@ const countMoney = (money, income, expense) => {
 
 const deleteTransaction = id => {
 	transactionToDelete = document.getElementById(id)
-	const amountToDelete = transactionToDelete.lastElementChild.innerText
+	const amountToDelete = parseFloat(transactionToDelete.lastElementChild.innerText)
 
 	const indexOfTransaction = moneyBalance.indexOf(amountToDelete)
 	const indexOfIncome = income.indexOf(amountToDelete)

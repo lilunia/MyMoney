@@ -24,6 +24,7 @@ h2,
 h3 {
   font-weight: 200;
   text-transform: uppercase;
+  pointer-events: none;
 }
 
 h2 {
@@ -276,7 +277,8 @@ h3 {
 }
 
 .error-value,
-.error-fields {
+.error-name,
+.error-category {
   margin-bottom: 1em;
   color: red;
 }

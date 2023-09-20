@@ -28,6 +28,8 @@ let transactionToDelete
 
 const openPopup = () => {
 	popup.style.display = 'block'
+	popup.style.top = `+${window.scrollY}px`
+	document.body.style.overflow = 'hidden'
 }
 const closePopup = () => {
 	nameInput.value = ''
@@ -40,6 +42,7 @@ const closePopup = () => {
 	amountInput.classList.remove('error')
 	category.classList.remove('error')
 	popup.style.display = 'none'
+	document.body.style.overflow = 'auto'
 }
 
 const addNewTransaction = () => {
@@ -54,7 +57,12 @@ const addNewTransaction = () => {
 
 const checkAmount = () => {
 	// const re = /(^([^0][0-9]+))|(^0?).[0-9]{0,2}$/
-	const re = /(^[^0][0-9]*)|(^0?).[0-9]{0,2}$/
+	// const re = /^0{0,1}[1-9]+.[0-9]{0,2}$/
+	// const re = /(^[1-9]+0*|^0?).[0-9]{0,2}$/
+	// const re = /(^[^0][1-9]*)|(^0.[0-9]{0,2}$)/
+	const re = /(^[^0][1-9]*)|(^0?.[0-9]{0,2}$)/
+
+
 	if (amountInput.value >= 0.01 && re.test(amountInput.value)) {
 		amountInput.classList.remove('error')
 		errorValue.textContent = ''

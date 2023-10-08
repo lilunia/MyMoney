@@ -37,15 +37,14 @@ Own project. Inspired by MMC School.
 ## Screenshots
 
 - main app
-      <p align="center">
-           <img src="./img/mywallet.PNG" width= "70%" height= "70%" alt="Screen Shot">
-      </p>
+     <p align="center">
+       <img src="./img/mywallet.PNG" width= "70%" height= "70%" alt="Screen Shot">
+     </p>
 
 - popup window
-      <p align="center">
-           <img src="./img/mywallet-popup.PNG" width= "70%" height= "7
-           0%" alt="Screen Shot">
-      </p>
+     <p align="center">
+       <img src="./img/mywallet-popup.PNG" width= "70%" height= "70%" alt="Screen Shot">
+     </p>
 
 ## JavaScript properties and methods
 

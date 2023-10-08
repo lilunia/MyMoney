@@ -1,4 +1,4 @@
-<img src="./img/mywallet.PNG" width= "100%" height= "700" alt="Screen Shot">
+<img src="./img/mywallet.PNG" width= "100%" height= "100%" alt="Screen Shot">
 
 # MyWallet
 
@@ -36,12 +36,12 @@ MyWallet was written in english language.
 
 - main app
       <p align="center">
-           <img src="./img/mywallet.PNG" width= "50%" height= "50%" alt="Screen Shot">
+           <img src="./img/mywallet.PNG" width= "70%" height= "70%" alt="Screen Shot">
       </p>
 
 - popup window
       <p align="center">
-           <img src="./img/mywallet-popup.PNG" width= "50%" height= "50%" alt="Screen Shot">
+           <img src="./img/mywallet-popup.PNG" width= "70%" height= "70%" alt="Screen Shot">
       </p>
 
 ## JavaScript properties and methods

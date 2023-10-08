@@ -8,19 +8,17 @@ html {
 	font-size: 62.5%;
 }
 body {
-	position: relative;
 	font-family: 'Montserrat', sans-serif;
 	min-height: 100vh;
 	background-color: rgba(244, 162, 97, 0.6);
 }
 .wrapper {
-	position: absolute;
-	margin: 0 auto;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 .5em;
 	width: 100%;
-	max-width: 1200px;
+	min-height: 100vh;
 }
 h2,
 h3 {
@@ -29,10 +27,10 @@ h3 {
 	pointer-events: none;
 }
 h2 {
-	font-size: 1.2rem;
+	font-size: 2rem;
 }
 h3 {
-	font-size: 1rem;
+	font-size: 1.5rem;
 }
 
 .x-icon,
@@ -42,11 +40,11 @@ h3 {
 	justify-content: center;
 	align-items: center;
 	margin-left: 0.5em;
-	height: 1.2em;
-	width: 1.2em;
+	height: 1.25em;
+	width: 1.25em;
 }
 .transaction-icon {
-	margin: 0.35em 0.5em 0;
+	margin: 0.25em 0.5em 0;
 }
 .wallet-icon {
 	height: 1.5em;
@@ -55,12 +53,13 @@ h3 {
 
 .panel {
 	display: flex;
-	justify-content: center;
 	align-items: center;
 	flex-direction: column;
 	text-align: center;
 	margin: 1em;
 	padding: 1em;
+	width: 100%;
+	max-width: 1000px;
 	border-radius: 1em;
 	background-color: #fff;
 
@@ -77,15 +76,14 @@ h3 {
 				display: flex;
 				justify-content: center;
 				align-items: center;
-				margin-bottom: 0.4em;
+				margin-bottom: 0.5em;
 				font-size: 1.5rem;
 			}
 			&-text {
-				font-size: 1rem;
+				font-size: 1.25rem;
 			}
 		}
 		&__money {
-			margin: 2em 0;
 			color: #fff;
 			&-available {
 				padding: 0.5em;
@@ -95,21 +93,22 @@ h3 {
 					margin-bottom: 0.5em;
 				}
 				&-amount {
-					font-size: 2rem;
+					font-size: 3rem;
 				}
 			}
 			&-flows {
 				display: flex;
 				justify-content: space-around;
 				align-items: center;
-				margin-bottom: 1em;
+				padding: 1em;
+				margin-bottom: 2em;
 				&-income,
 				&-expense {
 					&-heading {
 						margin-bottom: 0.5em;
 					}
 					&-amount {
-						font-size: 1.4rem;
+						font-size: 1.5rem;
 					}
 				}
 			}
@@ -117,11 +116,14 @@ h3 {
 	}
 
 	&-transactions {
+		display: flex;
+		justify-content: space-around;
+		flex-direction: column;
 		margin-top: 1em;
 		padding: 1em;
 		width: 100%;
 		border-radius: 1em;
-		border: 0.1em solid #2a9d8f;
+		border: 0.125em solid #2a9d8f;
 		background-color: #fff;
 		&__heading {
 			margin: 0.3em 0;
@@ -132,8 +134,8 @@ h3 {
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
-				margin-bottom: 1em;
-				font-size: 1rem;
+				margin-bottom: 0.25em;
+				font-size: 1.5rem;
 				&-name,
 				&-amount {
 					display: flex;
@@ -157,6 +159,7 @@ h3 {
 			display: flex;
 			justify-content: space-around;
 			align-items: center;
+			width: 100%;
 
 			button {
 				font-style: inherit;
@@ -164,7 +167,7 @@ h3 {
 				height: 3.5em;
 				margin: 1em 0.5em;
 				padding: 0.5em 1em;
-				border-radius: 0.4em;
+				border-radius: 0.5em;
 				img {
 					height: 40%;
 					.plus-img {
@@ -235,14 +238,14 @@ h3 {
 		}
 		label {
 			margin-bottom: 0.5em;
-			font-size: 1.2em;
+			font-size: 1.5em;
 		}
 		small {
-			font-size: 0.8em;
+			font-size: 1.25rem;
 		}
 		input,
 		select {
-			padding: 0.6em 1em;
+			padding: 0.5em 1em;
 			margin: 1em 2em;
 			width: 90%;
 			border-radius: 0.5em;
@@ -260,7 +263,7 @@ h3 {
 			margin: 1em;
 			width: 50%;
 			border-radius: 0.5em;
-			font-size: 1rem;
+			font-size: 1.25rem;
 		}
 
 		&-save {
@@ -291,14 +294,16 @@ h3 {
 .error-category {
 	margin-bottom: 1em;
 	color: red;
+	font-size: 1.5rem;
 }
 .error {
 	box-shadow: 0 0 0.5em red;
 }
 
 // MEDIA
-@media (min-width: 576px) {
+@media (min-width: 576px) and (min-height: 768px)  {
 	.panel {
+		margin: 2em;
 		&-transactions {
 			&__controls {
 				button {
@@ -322,24 +327,25 @@ h3 {
 		}
 	}
 }
-@media (min-width: 768px) {
+@media (min-width: 768px) and (min-height: 768px) {
 	.x-icon,
 	.add-icon,
 	.delete-all-icon {
-		height: 1.8em;
-		width: 1.8em;
+		height: 1.75em;
+		width: 1.75em;
 	}
 	.panel {
 		&-transactions {
+			margin-top: 2em;
 			&__controls {
 				button {
-					font-size: 1.2rem;
+					font-size: 1.5rem;
 				}
 			}
 
 			&__list {
 				&-transaction {
-					font-size: 1.4rem;
+					font-size: 2rem;
 				}
 			}
 		}
@@ -355,31 +361,46 @@ h3 {
 	}
 	.popup {
 		label {
-			font-size: 1.5em;
+			font-size: 2.5rem;
 		}
 		small {
-			font-size: 1em;
+			font-size: 1.5rem;
 		}
 		input,
 		select {
-			padding: 0.8em;
-			font-size: 1rem;
+			padding: 0.75em;
+			font-size: 1.5rem;
+		}
+		&__controls {
+			button {
+				font-size: 1.75rem;
+			}
 		}
 	}
 }
-@media (min-width: 992px) {
+@media (min-width: 992px) and (min-height: 768px)  {
 	h2 {
-		font-size: 1.8rem;
+		font-size: 2.5rem;
 	}
 	h3 {
-		font-size: 1.3rem;
+		font-size: 2rem;
 	}
 	.panel {
+		padding: 2em;
 		&-info {
+			&__header {
+				margin: 2em;
+				&-text {
+					font-size: 1.5rem;
+				}
+				&-heading {
+					font-size: 3rem;
+				}
+			}
 			&__money {
 				&-available {
 					&-amount {
-						font-size: 4rem;
+						font-size: 5rem;
 					}
 				}
 

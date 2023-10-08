@@ -17,6 +17,8 @@ The amount of available money, income and expenses are constantly updated.
 
 MyWallet was written in english language.
 
+Own project. Inspired by MMC School.
+
 ## Technologies
 
 <p align="left">
@@ -41,7 +43,8 @@ MyWallet was written in english language.
 
 - popup window
       <p align="center">
-           <img src="./img/mywallet-popup.PNG" width= "70%" height= "70%" alt="Screen Shot">
+           <img src="./img/mywallet-popup.PNG" width= "70%" height= "7
+           0%" alt="Screen Shot">
       </p>
 
 ## JavaScript properties and methods

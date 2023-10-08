@@ -56,11 +56,7 @@ const addNewTransaction = () => {
 }
 
 const checkAmount = () => {
-	// const re = /(^([^0][0-9]+))|(^0?).[0-9]{0,2}$/
-	// const re = /^0{0,1}[1-9]+.[0-9]{0,2}$/
-	// const re = /(^[1-9]+0*|^0?).[0-9]{0,2}$/
-	// const re = /(^[^0][1-9]*)|(^0.[0-9]{0,2}$)/
-	const re = /(^[^0][1-9]*)|(^0?.[0-9]{0,2}$)/
+	const re = /(^[1-9]+0*|^0?).[0-9]{0,2}$/
 
 
 	if (amountInput.value >= 0.01 && re.test(amountInput.value)) {

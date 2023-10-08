@@ -75,7 +75,7 @@ Own project. Inspired by MMC School.
 
 ## Live
 
-<a href="lilunia.github.io/MyWallet/">lilunia.github.io/MyWallet/</a>
+<a href="https://lilunia.github.io/MyWallet/">lilunia.github.io/MyWallet/</a>
 
 ## Problems
 

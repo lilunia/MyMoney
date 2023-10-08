@@ -12,7 +12,7 @@
 
 ## General info
 
-This application allows to manage own finances. When add transactions button is clicked popup window will appear. In this window need to be enter a name of transaction, an amount and select the transaction category. Transactions can be deleted either one by one or all of them at once.
+This application allows to manage own finances. When add transaction button is clicked popup window will appear. In this window need to be enter a name of transaction, an amount and select the transaction category. Transactions can be deleted either one by one or all of them at once.
 The amount of available money, income and expenses are constantly updated.
 
 MyWallet was written in english language.

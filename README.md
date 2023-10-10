@@ -1,6 +1,6 @@
-<img src="./img/mywallet.PNG" width= "100%" height= "100%" alt="Screen Shot">
+<img src="./img/mymoney.PNG" width= "100%" height= "100%" alt="Screen Shot">
 
-# MyWallet
+# MyMoney
 
 ## Table of contents
 
@@ -15,7 +15,7 @@
 This application allows to manage own finances. When add transactions button is clicked popup window will appear. In this window need to be enter a name of transaction, an amount and select the transaction category. Transactions can be deleted either one by one or all of them at once.
 The amount of available money, income and expenses are constantly updated.
 
-MyWallet was written in english language.
+MyMoney was written in english language.
 
 Own project. Inspired by MMC School.
 
@@ -38,12 +38,12 @@ Own project. Inspired by MMC School.
 
 - main app
      <p align="center">
-       <img src="./img/mywallet.PNG" width= "70%" height= "70%" alt="Screen Shot">
+       <img src="./img/mymoney.PNG" width= "70%" height= "70%" alt="Main app screenshot">
      </p>
 
 - popup window
      <p align="center">
-       <img src="./img/mywallet-popup.PNG" width= "70%" height= "70%" alt="Screen Shot">
+       <img src="./img/mymoney-popup.PNG" width= "70%" height= "70%" alt="Popup-window screenshot">
      </p>
 
 ## JavaScript properties and methods
@@ -75,7 +75,7 @@ Own project. Inspired by MMC School.
 
 ## Live
 
-<a href="https://lilunia.github.io/MyWallet/">lilunia.github.io/MyWallet/</a>
+<a href="https://lilunia.github.io/MyMoney/">lilunia.github.io/MyMoney/</a>
 
 ## Problems
 

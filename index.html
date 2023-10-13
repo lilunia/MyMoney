@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyMoney</title>
     <link rel="shortcut icon" type="image/svg+xml" href="./img/wallet.svg" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital@0;1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
 </head>
 
@@ -17,6 +17,7 @@
         <div class="panel">
             <div class="panel-info">
                 <div class="panel-info__header">
+
                     <h1 class="panel-info__header-heading"> <img class="wallet-icon" src="./img/wallet.svg"
                             alt="">MyMoney</h1>
                     <p class="panel-info__header-text">Your personal finance manager</p>
@@ -24,7 +25,7 @@
                 <div class="panel-info__money">
                     <div class="panel-info__money-available">
                         <h2 class="panel-info__money-available-heading">Available Money</h2>
-                        <p class="panel-info__money-available-amount">0zł</p>
+                        <p class="panel-info__money-available-amount">0 PLN</p>
                     </div>
                     <div class="panel-info__money-flows">
                         <div class="panel-info__money-flows-income">
@@ -40,26 +41,33 @@
 
             </div>
             <div class="panel-transactions">
-                <h2 class="panel-transactions__heading">Transaction list</h2>
+                <div class="panel-transactions__info">
+                    <h2 class="panel-transactions__info-heading">Transaction list</h2>
+                    <div class="panel-transactions__info-currency">
+                        <div class="panel-transactions__info-currency-selection">
+                            <h3 class="panel-transactions__info-currency-selection-header">Currency</h3>
+                            <select class="panel-transactions__info-currency-selection-select" name="currency"
+                                id="panel-currency">
+                                <option value="PLN" selected>PLN</option>
+                                <option value="EUR">EUR</option>
+                                <option value="USD">USD</option>
+                                <option value="GBP">GBP</option>
+                                <option value="CHF">CHF</option>
+                            </select>
+                        </div>
+
+                        <p class="panel-transactions__info-currency-rate">Rate info</p>
+                    </div>
+                </div>
+
                 <div class="panel-transactions__list">
-                    <!-- <div class="panel-transactions__list-transaction">
-                        <p class="panel-transactions__list-transaction-name">Wypłata </p>
-                        <p class="panel-transactions__list-transaction-amount"> 5500zł <button
-                                class="panel-transactions__list-transaction-deleteBtn">
-                                <span class="x-icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                        viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
-                                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                                    </svg></span>
-                            </button></p>
-                    </div> -->
+
                 </div>
                 <div class="panel-transactions__controls">
                     <button class="panel-transactions__controls-add">Add transaction
                         <span class="add-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="feather feather-plus">
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
                                 <line x1="12" y1="5" x2="12" y2="19"></line>
                                 <line x1="5" y1="12" x2="19" y2="12"></line>
                             </svg></span>
@@ -86,29 +94,52 @@
         <div class="popup__form">
             <h2 class="popup__form-heading">Add new transaction</h2>
 
-            <label for="name">Name:</label>
-            <small>(enter a name of transaction)</small>
-            <input type="text" id="name">
-            <p class="error-name"></p>
+            <div class="popup__form-box">
 
-            <label for="amount">Amount:</label>
-            <small>(enter an amount of transaction)</small>
-            <input type="number" id="amount" step="0.01" min="0">
-            <p class="error-value"></p>
+                <label for="name">Name:</label>
+                <input type="text" id="name" placeholder="Name of transaction">
+                <p class="error-name"></p>
 
-            <label for="category">Choose a category:</label>
-            <small>([ + ] means income, [ - ] means expense)</small>
-            <select id="category">
-                <option value="none">-- Choose an option --</option>
-                <option value="income">[+] Income</option>
-                <option value="bills">[-] Bills</option>
-                <option value="food">[-] Food</option>
-                <option value="fuel-tickets">[-] Fuel and tickets</option>
-                <option value="entertainment">[-] Entertainment</option>
-                <option value="other">[-] Other</option>
-            </select>
-            <p class="error-category"></p>
+                <div class="popup__form-box-amount">
+                    <label for="amount">Amount:</label>
+                    <div class="popup__form-box-amount-input">
+                        <input class="popup__form-box-amount-input-inside" type="number" id="amount" step="0.01" min="0"
+                            placeholder="Amount of transaction">
+                        <select class="popup__form-box-amount-input-selection" name="currency" id="popup-currency">
+                            <option value="PLN" selected>PLN</option>
+                            <option value="EUR">EUR</option>
+                            <option value="USD">USD</option>
+                            <option value="GBP">GBP</option>
+                            <option value="CHF">CHF</option>
+                        </select>
+                    </div>
+                    <div class="popup__form-box-amount-checkbox">
+                        <div class="popup__form-box-amount-checkbox-current">
+                            <input type="checkbox" id="current-rate" disabled>
+                            <label class="current-rate" for="current-rate">current rate</label>
+                        </div>
+                        <div class="popup__form-box-amount-checkbox-user">
+                            <input type="checkbox" id="user-rate" disabled>
+                            <label class=" user-rate" for="user-rate" step="0.01" min="0">your rate</label>
+                        </div>
+                        <input type="number" type="checkbox" id="user-rate-input" step="0.0001" min="0" placeholder="your rate" disabled>
+                    </div>
+                    <p class="error-value"></p>
 
+                </div>
+
+                <label for="category">Category:</label>
+                <select id="category">
+                    <option value="none">-- Choose an option --</option>
+                    <option value="income">[+] Income</option>
+                    <option value="bills">[-] Bills</option>
+                    <option value="food">[-] Food</option>
+                    <option value="fuel-tickets">[-] Fuel and tickets</option>
+                    <option value="entertainment">[-] Entertainment</option>
+                    <option value="other">[-] Other</option>
+                </select>
+                <p class="error-category"></p>
+            </div>
             <div class="popup__controls">
                 <button class="popup__controls-save">Save</button>
                 <button class="popup__controls-cancel">Cancel</button>

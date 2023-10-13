@@ -1,6 +1,6 @@
 const addBtn = document.querySelector('.panel-transactions__controls-add')
 const deleteAllBtn = document.querySelector('.panel-transactions__controls-delete-all')
-const deleteBtn = document.querySelector('.panel-transactions__list-transaction-deleteBtn')
+// const deleteBtn = document.querySelector('.panel-transactions__list-transaction-deleteBtn')
 const transactionsList = document.querySelector('.panel-transactions__list')
 
 const availableMoney = document.querySelector('.panel-info__money-available-amount')
@@ -18,15 +18,28 @@ const errorCategory = document.querySelector('.error-category')
 const saveBtn = document.querySelector('.popup__controls-save')
 const cancelBtn = document.querySelector('.popup__controls-cancel')
 
+const currentRateCheckbox = document.querySelector('#current-rate')
+const userRateCheckbox = document.querySelector('#user-rate')
+const userRateValue = document.querySelector('#user-rate-input')
+const transactionCurrency = document.querySelector('#popup-currency')
+const mainCurrency = document.querySelector('#panel-currency')
+
 let selectedCategory
 let categoryIcon
 let id = 0
 let moneyBalance = [0]
 let expense = [0]
 let income = [0]
-let transactionToDelete
+// let transactionToDelete
+let targetTransaction
+let selectedMainCurrency
+let selectedTransactionCurrency
+let rate
+let exchangedValue
 
 const openPopup = () => {
+	selectedMainCurrency = mainCurrency.value
+	transactionCurrency.value = selectedMainCurrency
 	popup.style.display = 'block'
 	popup.style.top = `+${window.scrollY}px`
 	document.body.style.overflow = 'hidden'
@@ -38,9 +51,16 @@ const closePopup = () => {
 	errorName.textContent = ''
 	errorValue.textContent = ''
 	errorCategory.textContent = ''
+	userRateValue.value = ''
 	nameInput.classList.remove('error')
 	amountInput.classList.remove('error')
 	category.classList.remove('error')
+	userRateValue.classList.remove('error')
+	userRateCheckbox.checked = false
+	currentRateCheckbox.checked = false
+	userRateValue.disabled = true
+	currentRateCheckbox.disabled = true
+	userRateCheckbox.disabled = true
 	popup.style.display = 'none'
 	document.body.style.overflow = 'auto'
 }
@@ -49,7 +69,7 @@ const addNewTransaction = () => {
 	errorCategory.textContent = ''
 
 	if (nameInput.value.trim() !== '' && amountInput.value !== '' && category.value !== 'none') {
-		checkAmount()
+		checkCurrency()
 	} else {
 		errorCategory.textContent = 'Fill in all fields!'
 	}
@@ -57,7 +77,6 @@ const addNewTransaction = () => {
 
 const checkAmount = () => {
 	const re = /(^[1-9]+0*|^0?).[0-9]{0,2}$/
-
 
 	if (amountInput.value >= 0.01 && re.test(amountInput.value)) {
 		amountInput.classList.remove('error')
@@ -70,6 +89,57 @@ const checkAmount = () => {
 	}
 }
 
+const checkboxStatus = () => {
+	if (transactionCurrency.value !== mainCurrency.value) {
+		console.log('inna waluta tutaj')
+		currentRateCheckbox.disabled = false
+		userRateCheckbox.disabled = false
+	} else {
+		currentRateCheckbox.disabled = true
+		userRateCheckbox.disabled = true
+	}
+}
+
+const checkUserRate = () => {
+	if (userRateValue.disabled === false && userRateValue.value !== '') {
+		const re = /(^[0-9]?).[0-9]{2,4}$/
+		if (userRateValue.value >= 0.0001 && userRateValue.value < 10 && re.test(userRateValue.value)) {
+			userRateValue.classList.remove('error')
+			errorValue.textContent = ''
+			console.log('correct value rate')
+			exchangeMoney()
+			checkAmount()
+		} else {
+			userRateValue.classList.add('error')
+			errorValue.textContent = 'Please enter the correct rate!'
+		}
+	} else if (userRateValue.disabled === true) {
+		checkAmount()
+	}
+}
+
+const checkCurrency = () => {
+	if (userRateValue.disabled === true) {
+		checkAmount()
+	} else {
+		checkUserRate()
+		console.log('inna waluta')
+	}
+}
+
+const exchangeMoney = () => {
+	if (userRateCheckbox.checked === true) {
+		rate = userRateValue.value
+		exchangedValue = amountInput.value * rate
+		amountInput.value = exchangedValue
+	} else {
+		//calculateCurrency()
+		console.log('current rate CHOSEN')
+	}
+}
+
+// const calculateCurrency = () => {}
+
 const createNewTransaction = () => {
 	const newTransaction = document.createElement('div')
 	newTransaction.classList.add('panel-transactions__list-transaction')
@@ -77,8 +147,8 @@ const createNewTransaction = () => {
 	addIcon(selectedCategory)
 	newTransaction.innerHTML = `
 	<p class="panel-transactions__list-transaction-name">${categoryIcon}${nameInput.value}</p>
-	<p class="panel-transactions__list-transaction-amount">${parseFloat(amountInput.value).toFixed(2)}zł 
-		<button class="panel-transactions__list-transaction-deleteBtn"  onclick="deleteTransaction(${id})">
+	<p class="panel-transactions__list-transaction-amount">${parseFloat(amountInput.value).toFixed(2)} ${mainCurrency.value}
+		<button class="panel-transactions__list-transaction-deleteBtn">
 			<span class="x-icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 					viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2"
 					stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
@@ -87,6 +157,7 @@ const createNewTransaction = () => {
 			</svg></span>
 		</button></p>
 	`
+
 	if (amountInput.value > 0) {
 		newTransaction.classList.add('income')
 		income.push(parseFloat(amountInput.value))
@@ -176,15 +247,22 @@ const countMoney = (money, income, expense) => {
 	const sumIncome = income.reduce((x, y) => x + y).toFixed(2)
 	const sumExpense = expense.reduce((x, y) => x + y).toFixed(2)
 
-	availableMoney.textContent = `${sum}zł`
-	incomeAmount.textContent = `${sumIncome}zł`
-	expenseAmount.textContent = `${sumExpense}zł`
+	availableMoney.textContent = `${sum} ${mainCurrency.value}`
+	incomeAmount.textContent = `${sumIncome} ${mainCurrency.value}`
+	expenseAmount.textContent = `${sumExpense} ${mainCurrency.value}`
 }
 
-const deleteTransaction = id => {
-	transactionToDelete = document.getElementById(id)
-	const amountToDelete = parseFloat(transactionToDelete.lastElementChild.innerText)
+const checkClick = e => {
+	if (e.target.classList.value !== 0) {
+		if (e.target.closest('.panel-transactions__list-transaction')) {
+			targetTransaction = e.target.closest('.panel-transactions__list-transaction')
+			deleteTransaction(targetTransaction)
+		}
+	}
+}
 
+const deleteTransaction = transactionToDelete => {
+	const amountToDelete = parseFloat(transactionToDelete.lastElementChild.innerText)
 	const indexOfTransaction = moneyBalance.indexOf(amountToDelete)
 	const indexOfIncome = income.indexOf(amountToDelete)
 	const indexOfExpense = expense.indexOf(amountToDelete)
@@ -201,7 +279,7 @@ const deleteTransaction = id => {
 
 const deleteAll = () => {
 	transactionsList.innerHTML = ''
-	availableMoney.textContent = '0zł'
+	availableMoney.textContent = `0 ${mainCurrency.value}`
 	incomeAmount.textContent = ''
 	expenseAmount.textContent = ''
 	moneyBalance = [0]
@@ -209,8 +287,27 @@ const deleteAll = () => {
 	income = [0]
 }
 
+const setCheckbox = e => {
+	const status = e.target.checked
+	if (e.target === userRateCheckbox) {
+		currentRateCheckbox.checked = !status
+	} else if (e.target === currentRateCheckbox) {
+		userRateCheckbox.checked = !status
+	}
+	if (userRateCheckbox.checked === true) {
+		userRateValue.disabled = false
+	} else {
+		userRateValue.disabled = true
+	}
+}
+
 addBtn.addEventListener('click', openPopup)
 category.addEventListener('change', addIcon)
 saveBtn.addEventListener('click', addNewTransaction)
 cancelBtn.addEventListener('click', closePopup)
 deleteAllBtn.addEventListener('click', deleteAll)
+transactionsList.addEventListener('click', checkClick)
+transactionCurrency.addEventListener('change', checkboxStatus)
+
+userRateCheckbox.addEventListener('click', setCheckbox)
+currentRateCheckbox.addEventListener('click', setCheckbox)

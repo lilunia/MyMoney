@@ -9,16 +9,16 @@ html {
 }
 
 body {
-  font-family: "Montserrat", sans-serif;
   min-height: 100vh;
-  background-color: rgba(244, 162, 97, 0.6);
+  font-family: "Titillium Web", sans-serif;
+  background-color: #e5e5e5;
 }
 
 .wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 0.5em;
+  margin: 0 auto;
   width: 100%;
   min-height: 100vh;
 }
@@ -26,7 +26,6 @@ body {
 h2,
 h3 {
   font-weight: 200;
-  text-transform: uppercase;
   pointer-events: none;
 }
 
@@ -56,43 +55,46 @@ h3 {
 .wallet-icon {
   height: 1.5em;
   width: 1.5em;
+  color: #000;
 }
 
 .panel {
   display: flex;
-  align-items: center;
   flex-direction: column;
-  text-align: center;
   margin: 1em;
-  padding: 1em;
   width: 100%;
   max-width: 800px;
-  border-radius: 1em;
+  border-radius: 1.5em;
   background-color: #fff;
+  box-shadow: 0.5em 0.5em 1.5em grey;
 }
 .panel-info {
   width: 100%;
-  background-color: #2a9d8f;
-  border-radius: 1em;
+  border-top-right-radius: 1.5em;
+  border-top-left-radius: 1.5em;
 }
 .panel-info__header {
   margin: 1em;
-  padding: 1em;
-  background-color: #f4a261;
-  border-radius: 1em;
+  border-radius: 1.5em;
+  color: #000;
 }
 .panel-info__header-heading {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
-  margin-bottom: 0.5em;
-  font-size: 1.5rem;
-}
-.panel-info__header-text {
   font-size: 1.25rem;
 }
+.panel-info__header-text {
+  font-size: 1rem;
+}
 .panel-info__money {
+  margin: 0 1em 1em;
+  padding: 2em;
+  text-align: center;
   color: #fff;
+  background-color: #3bb78f;
+  background-image: linear-gradient(315deg, #3bb78f 0%, #0bab64 74%);
+  border-radius: 1.5em;
 }
 .panel-info__money-available {
   padding: 0.5em;
@@ -109,7 +111,6 @@ h3 {
   justify-content: space-around;
   align-items: center;
   padding: 1em;
-  margin-bottom: 2em;
 }
 .panel-info__money-flows-income-heading, .panel-info__money-flows-expense-heading {
   margin-bottom: 0.5em;
@@ -119,17 +120,45 @@ h3 {
 }
 .panel-transactions {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   flex-direction: column;
-  margin-top: 1em;
   padding: 1em;
   width: 100%;
-  border-radius: 1em;
-  border: 0.125em solid #2a9d8f;
+  border-radius: 1.5em;
   background-color: #fff;
 }
-.panel-transactions__heading {
-  margin: 0.3em 0;
+.panel-transactions__info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.panel-transactions__info-heading {
+  margin: 0.25em 0;
+}
+.panel-transactions__info-currency {
+  text-align: center;
+}
+.panel-transactions__info-currency-selection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5em;
+}
+.panel-transactions__info-currency-selection-header {
+  margin-right: 1em;
+}
+.panel-transactions__info-currency-selection-select {
+  font: inherit;
+  font-size: 1.5rem;
+  color: #226b54;
+  background: none;
+  border: none;
+}
+.panel-transactions__info-currency-rate {
+  grid-row: 2/3;
+  margin-top: 0.5em;
+  font-size: 1.25rem;
 }
 .panel-transactions__list {
   margin: 2em 0;
@@ -140,6 +169,7 @@ h3 {
   align-items: center;
   margin-bottom: 0.25em;
   font-size: 1.5rem;
+  border-bottom: 0.0625em solid #ddd;
 }
 .panel-transactions__list-transaction-name, .panel-transactions__list-transaction-amount {
   display: flex;
@@ -156,6 +186,9 @@ h3 {
 .panel-transactions__list-transaction-deleteBtn:hover {
   transform: scale(0.8);
 }
+.panel-transactions__list-transaction:last-child {
+  border-bottom: none;
+}
 .panel-transactions__controls {
   display: flex;
   justify-content: space-around;
@@ -164,24 +197,19 @@ h3 {
 }
 .panel-transactions__controls button {
   font-style: inherit;
-  width: 50%;
+  width: 40%;
   height: 3.5em;
   margin: 1em 0.5em;
   padding: 0.5em 1em;
-  border-radius: 0.5em;
-}
-.panel-transactions__controls button img {
-  height: 40%;
-}
-.panel-transactions__controls button img .plus-img {
-  background-color: #fff;
+  border-radius: 1em;
+  font-family: inherit;
 }
 .panel-transactions__controls-add {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #2a9d8f;
-  border: 1px solid #2a9d8f;
+  background-color: #3bb78f;
+  border: 1px solid #3bb78f;
   color: #fff;
   cursor: pointer;
   transition: background-color 0.3s;
@@ -190,16 +218,21 @@ h3 {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #fff;
-  border: 1px solid #2a9d8f;
+  background-color: #f4a261;
+  border: 1px solid #f4a261;
   color: #000;
   cursor: pointer;
   transition: background-color 0.3s;
 }
-.panel-transactions__controls-add:hover, .panel-transactions__controls-delete-all:hover {
-  background-color: #264653;
-  border: 1px solid #264653;
+.panel-transactions__controls-add:hover {
+  background-color: #226b54;
+  border: 1px solid #226b54;
   color: #fff;
+}
+.panel-transactions__controls-delete-all:hover {
+  background-color: #f87e1a;
+  border: 1px solid #f4a261;
+  color: #000;
 }
 
 .income {
@@ -210,14 +243,13 @@ h3 {
   display: none;
   position: absolute;
   top: 0;
-  right: 0;
-  bottom: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.65);
 }
 .popup__form {
-  position: relative;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -225,64 +257,125 @@ h3 {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  text-align: center;
+  padding: 1em;
   width: 90%;
-  max-width: 600px;
-  padding: 2em 1em;
-  background-color: #f4a261;
-  border-radius: 1em;
-}
-.popup__form-heading {
-  margin-bottom: 1em;
+  background-color: #fff;
+  border-radius: 1.5em;
 }
 .popup__form label {
-  margin-bottom: 0.5em;
-  font-size: 1.5em;
+  font-size: 1rem;
 }
-.popup__form small {
-  font-size: 1.25rem;
-}
-.popup__form input,
-.popup__form select {
+.popup__form input#name,
+.popup__form select#category,
+.popup__form input#user-rate-input {
   padding: 0.5em 1em;
-  margin: 1em 2em;
-  width: 90%;
-  border-radius: 0.5em;
-  border: 0.1em solid #000;
+  width: 100%;
+  background: none;
+  border: none;
+  border-bottom: 0.125em solid #ddd;
+  font: inherit;
+  font-size: 1.5rem;
+}
+.popup__form input#user-rate-input {
+  width: 30%;
+}
+.popup__form input#current-rate,
+.popup__form input#user-rate {
+  margin: 0.125em;
+}
+.popup__form select#category {
+  color: grey;
+}
+.popup__form-heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5em 0;
+}
+.popup__form-box {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 0 2em;
+  width: 100%;
+}
+.popup__form-box-amount {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+  width: 100%;
+}
+.popup__form-box-amount-input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.popup__form-box-amount-input-inside, .popup__form-box-amount-input-selection {
+  padding: 0.5em 1em;
+  border: none;
+  border-bottom: 0.125em solid #ddd;
+}
+.popup__form-box-amount-input-inside {
+  margin-right: 1em;
+  width: 70%;
+}
+.popup__form-box-amount-input-selection {
+  width: 30%;
+  background: none;
+  font: inherit;
+}
+.popup__form-box-amount-checkbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1em;
+  width: 100%;
+}
+.popup__form-box-amount-checkbox-current, .popup__form-box-amount-checkbox-user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+}
+.popup__form-box-amount-checkbox label {
+  margin-bottom: 0;
 }
 .popup__controls {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 90%;
+  width: 80%;
 }
 .popup__controls button {
   padding: 0.5em 1em;
   margin: 1em;
   width: 50%;
-  border-radius: 0.5em;
+  border-radius: 1em;
+  border: none;
   font-size: 1.25rem;
+  font-family: inherit;
 }
 .popup__controls-save {
-  background-color: #2a9d8f;
+  background-color: #3bb78f;
   color: #fff;
-  border: 1px solid transparent;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 .popup__controls-save:hover {
-  background-color: #264653;
+  background-color: #226b54;
 }
 .popup__controls-cancel {
-  background: none;
+  background-color: #f4a261;
   color: #000;
-  border: 1px solid #000;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 .popup__controls-cancel:hover {
-  background: #fff;
-  border: 1px solid transparent;
+  background: #f87e1a;
 }
 
 .error-value,
@@ -297,9 +390,51 @@ h3 {
   box-shadow: 0 0 0.5em red;
 }
 
+@media (min-width: 576px) {
+  .panel-transactions {
+    padding: 0 4em;
+  }
+  .panel-info__header {
+    margin: 2em 2em 1em;
+  }
+  .panel-info__money {
+    margin: 0 2em 2em;
+  }
+  .panel-info__money-flows-income-amount, .panel-info__money-flows-expense-amount {
+    font-size: 2rem;
+  }
+  .popup__form {
+    width: 50rem;
+  }
+}
 @media (min-width: 576px) and (min-height: 768px) {
   .panel {
     margin: 2em;
+  }
+  .panel-transactions__info {
+    display: grid;
+    align-items: start;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+  .panel-transactions__info-heading {
+    display: flex;
+    justify-content: center;
+    grid-column: 2/4;
+    grid-row: 1/2;
+    margin: 0.3em 0;
+  }
+  .panel-transactions__info-currency {
+    display: grid;
+    grid-column: 4/5;
+    grid-row: 1/3;
+  }
+  .panel-transactions__info-currency-selection {
+    grid-row: 1/2;
+    margin: 0.3em 0;
+  }
+  .panel-transactions__info-currency-rate {
+    font-size: 1.5rem;
   }
   .panel-transactions__controls button {
     margin: 2em;
@@ -308,7 +443,14 @@ h3 {
     font-size: 3rem;
   }
   .panel-info__header-heading {
-    font-size: 2rem;
+    font-size: 1.5rem;
+  }
+  .popup__form {
+    width: 50rem;
+  }
+  .popup__form input#current-rate,
+  .popup__form input#user-rate {
+    margin: 0.75em;
   }
 }
 @media (min-width: 768px) and (min-height: 768px) {
@@ -319,7 +461,7 @@ h3 {
     width: 1.75em;
   }
   .panel-transactions {
-    margin-top: 2em;
+    padding: 2em 5em;
   }
   .panel-transactions__controls button {
     font-size: 1.5rem;
@@ -327,22 +469,20 @@ h3 {
   .panel-transactions__list-transaction {
     font-size: 2rem;
   }
+  .panel-info__header {
+    margin: 2em 3em 1em;
+  }
+  .panel-info__header-text {
+    font-size: 1.25rem;
+  }
+  .panel-info__header-heading {
+    font-size: 2rem;
+  }
+  .panel-info__money {
+    margin: 0 3em;
+  }
   .panel-info__money-available-amount {
     font-size: 3rem;
-  }
-  .popup label {
-    font-size: 2.5rem;
-  }
-  .popup small {
-    font-size: 1.5rem;
-  }
-  .popup input,
-  .popup select {
-    padding: 0.75em;
-    font-size: 1.5rem;
-  }
-  .popup__controls button {
-    font-size: 1.75rem;
   }
 }
 @media (min-width: 992px) and (min-height: 768px) {
@@ -353,17 +493,13 @@ h3 {
     font-size: 2rem;
   }
   .panel {
-    padding: 2em;
-    max-width: 1000px;
+    max-width: 100rem;
   }
-  .panel__header {
-    margin: 2em;
+  .panel-info__header-text {
+    font-size: 1.25rem;
   }
-  .panel__header-text {
-    font-size: 1.5rem;
-  }
-  .panel__header-heading {
-    font-size: 3rem;
+  .panel-info__header-heading {
+    font-size: 2rem;
   }
   .panel-info__money-available-amount {
     font-size: 5rem;
@@ -373,5 +509,19 @@ h3 {
   }
   .panel-info__money-flows-income-amount, .panel-info__money-flows-expense-amount {
     font-size: 3rem;
+  }
+  .popup__form {
+    width: 800px;
+  }
+  .popup label {
+    font-size: 1.5rem;
+  }
+  .popup input,
+  .popup select {
+    padding: 0.75em;
+    font-size: 1.5rem;
+  }
+  .popup__controls button {
+    font-size: 1.75rem;
   }
 }/*# sourceMappingURL=style.css.map */

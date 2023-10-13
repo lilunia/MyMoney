@@ -8,22 +8,21 @@ html {
 	font-size: 62.5%;
 }
 body {
-	font-family: 'Montserrat', sans-serif;
 	min-height: 100vh;
-	background-color: rgba(244, 162, 97, 0.6);
+	font-family: 'Titillium Web', sans-serif;
+	background-color: #e5e5e5;
 }
 .wrapper {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin: 0 0.5em;
+	margin: 0 auto;
 	width: 100%;
 	min-height: 100vh;
 }
 h2,
 h3 {
 	font-weight: 200;
-	text-transform: uppercase;
 	pointer-events: none;
 }
 h2 {
@@ -49,42 +48,45 @@ h3 {
 .wallet-icon {
 	height: 1.5em;
 	width: 1.5em;
+	color: #000;
 }
 
 .panel {
 	display: flex;
-	align-items: center;
 	flex-direction: column;
-	text-align: center;
 	margin: 1em;
-	padding: 1em;
 	width: 100%;
 	max-width: 800px;
-	border-radius: 1em;
+	border-radius: 1.5em;
 	background-color: #fff;
+	box-shadow: 0.5em 0.5em 1.5em grey;
 
 	&-info {
 		width: 100%;
-		background-color: #2a9d8f;
-		border-radius: 1em;
+		border-top-right-radius: 1.5em;
+		border-top-left-radius: 1.5em;
 		&__header {
 			margin: 1em;
-			padding: 1em;
-			background-color: #f4a261;
-			border-radius: 1em;
+			border-radius: 1.5em;
+			color: #000;
 			&-heading {
 				display: flex;
-				justify-content: center;
+				justify-content: start;
 				align-items: center;
-				margin-bottom: 0.5em;
-				font-size: 1.5rem;
+				font-size: 1.25rem;
 			}
 			&-text {
-				font-size: 1.25rem;
+				font-size: 1rem;
 			}
 		}
 		&__money {
+			margin: 0 1em 1em;
+			padding: 2em;
+			text-align: center;
 			color: #fff;
+			background-color: #3bb78f;
+			background-image: linear-gradient(315deg, #3bb78f 0%, #0bab64 74%);
+			border-radius: 1.5em;
 			&-available {
 				padding: 0.5em;
 				margin-bottom: 0.5em;
@@ -101,7 +103,6 @@ h3 {
 				justify-content: space-around;
 				align-items: center;
 				padding: 1em;
-				margin-bottom: 2em;
 				&-income,
 				&-expense {
 					&-heading {
@@ -117,17 +118,48 @@ h3 {
 
 	&-transactions {
 		display: flex;
-		justify-content: space-around;
+		justify-content: center;
 		flex-direction: column;
-		margin-top: 1em;
 		padding: 1em;
 		width: 100%;
-		border-radius: 1em;
-		border: 0.125em solid #2a9d8f;
+		border-radius: 1.5em;
 		background-color: #fff;
-		&__heading {
-			margin: 0.3em 0;
+
+		&__info {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			&-heading {
+				margin: 0.25em 0;
+			}
+			&-currency {
+				text-align: center;
+
+				&-selection {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					margin: 0.5em;
+					&-header {
+						margin-right: 1em;
+					}
+					&-select {
+						font: inherit;
+						font-size: 1.5rem;
+						color: #226b54;
+						background: none;
+						border: none;
+					}
+				}
+				&-rate {
+					grid-row: 2/3;
+					margin-top: 0.5em;
+					font-size: 1.25rem;
+				}
+			}
 		}
+
 		&__list {
 			margin: 2em 0;
 			&-transaction {
@@ -136,6 +168,7 @@ h3 {
 				align-items: center;
 				margin-bottom: 0.25em;
 				font-size: 1.5rem;
+				border-bottom: 0.0625em solid #ddd;
 				&-name,
 				&-amount {
 					display: flex;
@@ -153,6 +186,9 @@ h3 {
 					transform: scale(0.8);
 				}
 			}
+			&-transaction:last-child {
+				border-bottom: none;
+			}
 		}
 
 		&__controls {
@@ -163,24 +199,19 @@ h3 {
 
 			button {
 				font-style: inherit;
-				width: 50%;
+				width: 40%;
 				height: 3.5em;
 				margin: 1em 0.5em;
 				padding: 0.5em 1em;
-				border-radius: 0.5em;
-				img {
-					height: 40%;
-					.plus-img {
-						background-color: #fff;
-					}
-				}
+				border-radius: 1em;
+				font-family: inherit;
 			}
 			&-add {
 				display: flex;
 				justify-content: center;
 				align-items: center;
-				background-color: #2a9d8f;
-				border: 1px solid #2a9d8f;
+				background-color: #3bb78f;
+				border: 1px solid #3bb78f;
 				color: #fff;
 				cursor: pointer;
 				transition: background-color 0.3s;
@@ -189,17 +220,21 @@ h3 {
 				display: flex;
 				justify-content: center;
 				align-items: center;
-				background-color: #fff;
-				border: 1px solid #2a9d8f;
+				background-color: #f4a261;
+				border: 1px solid #f4a261;
 				color: #000;
 				cursor: pointer;
 				transition: background-color 0.3s;
 			}
-			&-add:hover,
-			&-delete-all:hover {
-				background-color: #264653;
-				border: 1px solid #264653;
+			&-add:hover {
+				background-color: #226b54;
+				border: 1px solid #226b54;
 				color: #fff;
+			}
+			&-delete-all:hover {
+				background-color: #f87e1a;
+				border: 1px solid #f4a261;
+				color: #000;
 			}
 		}
 	}
@@ -211,14 +246,13 @@ h3 {
 	display: none;
 	position: absolute;
 	top: 0;
-	right: 0;
-	bottom: 0;
+	left: 0;
 	width: 100%;
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.65);
 
 	&__form {
-		position: relative;
+		position: absolute;
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
@@ -226,66 +260,133 @@ h3 {
 		justify-content: center;
 		align-items: center;
 		flex-direction: column;
-		text-align: center;
+		padding: 1em;
 		width: 90%;
-		max-width: 600px;
-		padding: 2em 1em;
-		background-color: #f4a261;
-		border-radius: 1em;
+		background-color: #fff;
+		border-radius: 1.5em;
+
+		label {
+			font-size: 1rem;
+		}
+		input#name,
+		select#category,
+		input#user-rate-input {
+			padding: 0.5em 1em;
+			width: 100%;
+			background: none;
+			border: none;
+			border-bottom: 0.125em solid #ddd;
+			font: inherit;
+			font-size: 1.5rem;
+		}
+		input#user-rate-input {
+			width: 30%;
+		}
+		input#current-rate,
+		input#user-rate {
+			margin: 0.125em;
+		}
+		select#category {
+			color: grey;
+		}
 
 		&-heading {
-			margin-bottom: 1em;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin: 0.5em 0;
 		}
-		label {
-			margin-bottom: 0.5em;
-			font-size: 1.5em;
-		}
-		small {
-			font-size: 1.25rem;
-		}
-		input,
-		select {
-			padding: 0.5em 1em;
-			margin: 1em 2em;
-			width: 90%;
-			border-radius: 0.5em;
-			border: 0.1em solid #000;
+		&-box {
+			display: flex;
+			justify-content: center;
+			align-items: start;
+			flex-direction: column;
+			margin: 0 auto;
+			padding: 0 2em;
+			width: 100%;
+			&-amount {
+				display: flex;
+				justify-content: center;
+				align-items: start;
+				flex-direction: column;
+				width: 100%;
+				&-input {
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					width: 100%;
+
+					&-inside,
+					&-selection {
+						padding: 0.5em 1em;
+						border: none;
+						border-bottom: 0.125em solid #ddd;
+					}
+					&-inside {
+						margin-right: 1em;
+						width: 70%;
+					}
+					&-selection {
+						width: 30%;
+						background: none;
+						font: inherit;
+					}
+				}
+				&-checkbox {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					margin-top: 1em;
+					width: 100%;
+
+					&-current,
+					&-user {
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						width: 30%;
+					}
+
+					label {
+						margin-bottom: 0;
+					}
+				}
+			}
 		}
 	}
 	&__controls {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		width: 90%;
+		width: 80%;
 
 		button {
 			padding: 0.5em 1em;
 			margin: 1em;
 			width: 50%;
-			border-radius: 0.5em;
+			border-radius: 1em;
+			border: none;
 			font-size: 1.25rem;
+			font-family: inherit;
 		}
 
 		&-save {
-			background-color: #2a9d8f;
+			background-color: #3bb78f;
 			color: #fff;
-			border: 1px solid transparent;
 			cursor: pointer;
 			transition: background-color 0.3s;
 		}
 		&-save:hover {
-			background-color: #264653;
+			background-color: #226b54;
 		}
 		&-cancel {
-			background: none;
+			background-color: #f4a261;
 			color: #000;
-			border: 1px solid #000;
 			cursor: pointer;
 			transition: background-color 0.3s;
 		}
 		&-cancel:hover {
-			background: #fff;
-			border: 1px solid transparent;
+			background: #f87e1a;
 		}
 	}
 }
@@ -301,10 +402,67 @@ h3 {
 }
 
 // MEDIA
+
+@media (min-width: 576px) {
+	.panel {
+		&-transactions {
+			padding: 0 4em;
+		}
+		&-info {
+			&__header {
+				margin: 2em 2em 1em;
+			}
+			&__money {
+				margin: 0 2em 2em;
+
+				&-flows {
+					&-income,
+					&-expense {
+						&-amount {
+							font-size: 2rem;
+						}
+					}
+				}
+			}
+		}
+	}
+	.popup {
+		&__form {
+			width: 50rem;
+		}
+	}
+}
 @media (min-width: 576px) and (min-height: 768px) {
 	.panel {
 		margin: 2em;
 		&-transactions {
+			&__info {
+				display: grid;
+				align-items: start;
+				grid-template-columns: repeat(4, 1fr);
+				grid-template-rows: repeat(2, 1fr);
+
+				&-heading {
+					display: flex;
+					justify-content: center;
+					grid-column: 2/4;
+					grid-row: 1/2;
+					margin: 0.3em 0;
+				}
+				&-currency {
+					display: grid;
+					grid-column: 4/5;
+					grid-row: 1/3;
+					&-selection {
+						grid-row: 1/2;
+						margin: 0.3em 0;
+					}
+					&-rate {
+						font-size: 1.5rem;
+					}
+				}
+			}
+
 			&__controls {
 				button {
 					margin: 2em;
@@ -313,6 +471,7 @@ h3 {
 		}
 		&-info {
 			&__money {
+				//margin: 0 2em 2em;
 				&-available {
 					&-amount {
 						font-size: 3rem;
@@ -320,9 +479,19 @@ h3 {
 				}
 			}
 			&__header {
+				//margin: 2em 2em 1em;
 				&-heading {
-					font-size: 2rem;
+					font-size: 1.5rem;
 				}
+			}
+		}
+	}
+	.popup {
+		&__form {
+			width: 50rem;
+			input#current-rate,
+			input#user-rate {
+				margin: 0.75em;
 			}
 		}
 	}
@@ -336,7 +505,7 @@ h3 {
 	}
 	.panel {
 		&-transactions {
-			margin-top: 2em;
+			padding: 2em 5em;
 			&__controls {
 				button {
 					font-size: 1.5rem;
@@ -350,30 +519,22 @@ h3 {
 			}
 		}
 		&-info {
+			&__header {
+				margin: 2em 3em 1em;
+				&-text {
+					font-size: 1.25rem;
+				}
+				&-heading {
+					font-size: 2rem;
+				}
+			}
 			&__money {
+				margin: 0 3em;
 				&-available {
 					&-amount {
 						font-size: 3rem;
 					}
 				}
-			}
-		}
-	}
-	.popup {
-		label {
-			font-size: 2.5rem;
-		}
-		small {
-			font-size: 1.5rem;
-		}
-		input,
-		select {
-			padding: 0.75em;
-			font-size: 1.5rem;
-		}
-		&__controls {
-			button {
-				font-size: 1.75rem;
 			}
 		}
 	}
@@ -386,18 +547,17 @@ h3 {
 		font-size: 2rem;
 	}
 	.panel {
-		padding: 2em;
-		max-width: 1000px;
-		&__header {
-			margin: 2em;
-			&-text {
-				font-size: 1.5rem;
-			}
-			&-heading {
-				font-size: 3rem;
-			}
-		}
+		max-width: 100rem;
+
 		&-info {
+			&__header {
+				&-text {
+					font-size: 1.25rem;
+				}
+				&-heading {
+					font-size: 2rem;
+				}
+			}
 			&__money {
 				&-available {
 					&-amount {
@@ -416,6 +576,24 @@ h3 {
 						}
 					}
 				}
+			}
+		}
+	}
+	.popup {
+		&__form {
+			width: 800px;
+		}
+		label {
+			font-size: 1.5rem;
+		}
+		input,
+		select {
+			padding: 0.75em;
+			font-size: 1.5rem;
+		}
+		&__controls {
+			button {
+				font-size: 1.75rem;
 			}
 		}
 	}

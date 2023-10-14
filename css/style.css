@@ -209,7 +209,7 @@ h3 {
   justify-content: center;
   align-items: center;
   background-color: #3bb78f;
-  border: 1px solid #3bb78f;
+  border: 0.063rem solid #3bb78f;
   color: #fff;
   cursor: pointer;
   transition: background-color 0.3s;
@@ -219,19 +219,19 @@ h3 {
   justify-content: center;
   align-items: center;
   background-color: #f4a261;
-  border: 1px solid #f4a261;
+  border: 0.063rem solid #f4a261;
   color: #000;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 .panel-transactions__controls-add:hover {
   background-color: #226b54;
-  border: 1px solid #226b54;
+  border: 0.063rem solid #226b54;
   color: #fff;
 }
 .panel-transactions__controls-delete-all:hover {
-  background-color: #f87e1a;
-  border: 1px solid #f4a261;
+  background-color: #d08c55;
+  border: 0.063rem solid #f4a261;
   color: #000;
 }
 
@@ -375,7 +375,7 @@ h3 {
   transition: background-color 0.3s;
 }
 .popup__controls-cancel:hover {
-  background: #f87e1a;
+  background: #d08c55;
 }
 
 .error-value,
@@ -392,7 +392,7 @@ h3 {
 
 @media (min-width: 576px) {
   .panel-transactions {
-    padding: 0 4em;
+    padding: 2em 4em;
   }
   .panel-info__header {
     margin: 2em 2em 1em;

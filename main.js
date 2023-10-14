@@ -1,6 +1,5 @@
 const addBtn = document.querySelector('.panel-transactions__controls-add')
 const deleteAllBtn = document.querySelector('.panel-transactions__controls-delete-all')
-// const deleteBtn = document.querySelector('.panel-transactions__list-transaction-deleteBtn')
 const transactionsList = document.querySelector('.panel-transactions__list')
 
 const availableMoney = document.querySelector('.panel-info__money-available-amount')
@@ -66,12 +65,26 @@ const closePopup = () => {
 }
 
 const addNewTransaction = () => {
+	errorName.textContent = ''
+	errorValue.textContent = ''
 	errorCategory.textContent = ''
+	nameInput.classList.remove('error')
+	amountInput.classList.remove('error')
+	category.classList.remove('error')
+	userRateValue.classList.remove('error')
 
 	if (nameInput.value.trim() !== '' && amountInput.value !== '' && category.value !== 'none') {
 		checkCurrency()
+		checkAmount()
 	} else {
 		errorCategory.textContent = 'Fill in all fields!'
+	}
+}
+
+const checkCurrency = () => {
+	if (userRateValue.disabled === false) {
+		checkUserRate()
+		console.log('inna waluta')
 	}
 }
 
@@ -108,22 +121,10 @@ const checkUserRate = () => {
 			errorValue.textContent = ''
 			console.log('correct value rate')
 			exchangeMoney()
-			checkAmount()
 		} else {
 			userRateValue.classList.add('error')
 			errorValue.textContent = 'Please enter the correct rate!'
 		}
-	} else if (userRateValue.disabled === true) {
-		checkAmount()
-	}
-}
-
-const checkCurrency = () => {
-	if (userRateValue.disabled === true) {
-		checkAmount()
-	} else {
-		checkUserRate()
-		console.log('inna waluta')
 	}
 }
 
@@ -138,7 +139,10 @@ const exchangeMoney = () => {
 	}
 }
 
-// const calculateCurrency = () => {}
+const calculateCurrency = () => {
+
+	
+}
 
 const createNewTransaction = () => {
 	const newTransaction = document.createElement('div')
@@ -254,7 +258,7 @@ const countMoney = (money, income, expense) => {
 
 const checkClick = e => {
 	if (e.target.classList.value !== 0) {
-		if (e.target.closest('.panel-transactions__list-transaction')) {
+		if (e.target.closest('button').classList.contains('panel-transactions__list-transaction-deleteBtn')) {
 			targetTransaction = e.target.closest('.panel-transactions__list-transaction')
 			deleteTransaction(targetTransaction)
 		}
@@ -303,7 +307,10 @@ const setCheckbox = e => {
 
 addBtn.addEventListener('click', openPopup)
 category.addEventListener('change', addIcon)
-saveBtn.addEventListener('click', addNewTransaction)
+saveBtn.addEventListener('click', () => {
+	addNewTransaction()
+})
+
 cancelBtn.addEventListener('click', closePopup)
 deleteAllBtn.addEventListener('click', deleteAll)
 transactionsList.addEventListener('click', checkClick)

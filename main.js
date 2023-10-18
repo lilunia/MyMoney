@@ -34,7 +34,8 @@ let targetTransaction
 let selectedMainCurrency
 let selectedTransactionCurrency
 let rate
-let exchangedValue
+let exchangedValue = 0
+let allTransactions
 
 const openPopup = () => {
 	selectedMainCurrency = mainCurrency.value
@@ -51,10 +52,6 @@ const closePopup = () => {
 	errorValue.textContent = ''
 	errorCategory.textContent = ''
 	userRateValue.value = ''
-	nameInput.classList.remove('error')
-	amountInput.classList.remove('error')
-	category.classList.remove('error')
-	userRateValue.classList.remove('error')
 	userRateCheckbox.checked = false
 	currentRateCheckbox.checked = false
 	userRateValue.disabled = true
@@ -62,43 +59,55 @@ const closePopup = () => {
 	userRateCheckbox.disabled = true
 	popup.style.display = 'none'
 	document.body.style.overflow = 'auto'
+	clearErrors()
 }
-
-const addNewTransaction = () => {
-	errorName.textContent = ''
-	errorValue.textContent = ''
-	errorCategory.textContent = ''
+const clearErrors = () => {
 	nameInput.classList.remove('error')
 	amountInput.classList.remove('error')
 	category.classList.remove('error')
 	userRateValue.classList.remove('error')
+	errorName.textContent = ''
+	errorValue.textContent = ''
+	errorCategory.textContent = ''
+}
 
+const checkForm = () => {
 	if (nameInput.value.trim() !== '' && amountInput.value !== '' && category.value !== 'none') {
-		checkCurrency()
-		checkAmount()
+		checkAmount(amountInput)
+		errorCategory.textContent = ''
 	} else {
 		errorCategory.textContent = 'Fill in all fields!'
 	}
 }
 
-const checkCurrency = () => {
-	if (userRateValue.disabled === false) {
-		checkUserRate()
-		console.log('inna waluta')
+const checkAmount = amount => {
+	const re = /(^[1-9]+0*|^0?).[0-9]{0,2}$/
+
+	if (amount.value >= 0.01 && re.test(amount.value)) {
+		amount.classList.remove('error')
+		errorValue.textContent = ''
+		checkCurrency()
+		console.log('checkAmount correct')
+	} else {
+		amount.classList.add('error')
+		errorValue.textContent = 'Please enter the correct value!'
 	}
 }
 
-const checkAmount = () => {
-	const re = /(^[1-9]+0*|^0?).[0-9]{0,2}$/
-
-	if (amountInput.value >= 0.01 && re.test(amountInput.value)) {
-		amountInput.classList.remove('error')
-		errorValue.textContent = ''
-		createNewTransaction()
-		closePopup()
+const checkCurrency = () => {
+	if (transactionCurrency.value !== mainCurrency.value) {
+		console.log('inna waluta in checkCurrency')
+		errorValue.textContent = 'Please select current rate or enter your own rate!'
+		if (userRateCheckbox.checked === true) {
+			errorValue.textContent = ''
+			checkUserRate()
+			console.log('inna waluta')
+		} else if (currentRateCheckbox.checked === true) {
+			errorValue.textContent = ''
+			calculateCurrency()
+		}
 	} else {
-		amountInput.classList.add('error')
-		errorValue.textContent = 'Please enter the correct value!'
+		addNewTransaction()
 	}
 }
 
@@ -108,13 +117,17 @@ const checkboxStatus = () => {
 		currentRateCheckbox.disabled = false
 		userRateCheckbox.disabled = false
 	} else {
+		userRateCheckbox.checked = false
+		currentRateCheckbox.checked = false
 		currentRateCheckbox.disabled = true
 		userRateCheckbox.disabled = true
 	}
 }
 
 const checkUserRate = () => {
-	if (userRateValue.disabled === false && userRateValue.value !== '') {
+	console.log('user rate')
+	if (userRateCheckbox.checked === true && userRateValue.value !== '') {
+		errorValue.textContent = ''
 		const re = /(^[0-9]?).[0-9]{2,4}$/
 		if (userRateValue.value >= 0.0001 && userRateValue.value < 10 && re.test(userRateValue.value)) {
 			userRateValue.classList.remove('error')
@@ -125,30 +138,62 @@ const checkUserRate = () => {
 			userRateValue.classList.add('error')
 			errorValue.textContent = 'Please enter the correct rate!'
 		}
+	} else {
+		userRateValue.classList.add('error')
+		errorValue.textContent = 'Please enter the rate!'
 	}
 }
 
 const exchangeMoney = () => {
-	if (userRateCheckbox.checked === true) {
-		rate = userRateValue.value
-		exchangedValue = amountInput.value * rate
-		amountInput.value = exchangedValue
-	} else {
-		//calculateCurrency()
-		console.log('current rate CHOSEN')
-	}
+	rate = userRateValue.value
+	exchangedValue = amountInput.value * rate
+	// amountInput.value = exchangedValue
+	console.log('exchange money inside')
+	addNewTransaction()
 }
 
 const calculateCurrency = () => {
-
-	
+	fetch(
+		`https://api.getgeoapi.com/v2/currency/convert
+		?api_key=6843b0de6d14d7c6caf41af569de90135dd79aae
+		&from=${transactionCurrency.value}
+		&to=${mainCurrency.value}
+		&amount=${amountInput.value}
+		&format=json`
+	)
+		.then(res => res.json())
+		.then(data => {
+			// console.log(object);
+			console.log(data)
+			const rate = data.rates[mainCurrency.value].rate
+			console.log(`1 ${transactionCurrency.value} = ${rate} ${mainCurrency.value}`)
+			exchangedValue = amountInput.value * rate
+			console.log(exchangedValue)
+			// amountInput.value = exchangedValue
+			errorValue.textContent = `1 ${transactionCurrency.value} = ${rate} ${mainCurrency.value}`
+			// amountInput.value = exchangedValue
+			console.log('calculateCurrency inside')
+			setTimeout(addNewTransaction, 1000)
+		})
+		.catch(error => {
+			console.error(error)
+		})
 }
 
+const addNewTransaction = () => {
+	createNewTransaction()
+	closePopup()
+}
 const createNewTransaction = () => {
 	const newTransaction = document.createElement('div')
 	newTransaction.classList.add('panel-transactions__list-transaction')
 	selectedCategory = category.value
 	addIcon(selectedCategory)
+
+	if (transactionCurrency.value !== mainCurrency.value) {
+		amountInput.value = exchangedValue
+	}
+
 	newTransaction.innerHTML = `
 	<p class="panel-transactions__list-transaction-name">${categoryIcon}${nameInput.value}</p>
 	<p class="panel-transactions__list-transaction-amount">${parseFloat(amountInput.value).toFixed(2)} ${mainCurrency.value}
@@ -265,6 +310,10 @@ const checkClick = e => {
 	}
 }
 
+// const changeCurrency = () =>
+// {
+
+// }
 const deleteTransaction = transactionToDelete => {
 	const amountToDelete = parseFloat(transactionToDelete.lastElementChild.innerText)
 	const indexOfTransaction = moneyBalance.indexOf(amountToDelete)
@@ -305,16 +354,31 @@ const setCheckbox = e => {
 	}
 }
 
+const checkMainCurrency = () => {
+	allTransactions = document.getElementsByClassName('panel-transactions__list-transaction')
+	console.log(allTransactions.length)
+	console.log(allTransactions)
+
+	if (allTransactions.length === 0) {
+		availableMoney.textContent = `0 ${mainCurrency.value}`
+	}
+	// else{
+	// 	changeCurrency()
+	// 	countMoney()
+	// }
+}
+
 addBtn.addEventListener('click', openPopup)
 category.addEventListener('change', addIcon)
 saveBtn.addEventListener('click', () => {
-	addNewTransaction()
+	checkForm()
 })
 
 cancelBtn.addEventListener('click', closePopup)
 deleteAllBtn.addEventListener('click', deleteAll)
 transactionsList.addEventListener('click', checkClick)
 transactionCurrency.addEventListener('change', checkboxStatus)
+mainCurrency.addEventListener('change', checkMainCurrency)
 
 userRateCheckbox.addEventListener('click', setCheckbox)
 currentRateCheckbox.addEventListener('click', setCheckbox)

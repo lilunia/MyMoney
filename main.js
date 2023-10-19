@@ -17,6 +17,7 @@ const errorCategory = document.querySelector('.error-category')
 const saveBtn = document.querySelector('.popup__controls-save')
 const cancelBtn = document.querySelector('.popup__controls-cancel')
 
+const rateInfo = document.querySelector('.panel-transactions__info-currency-rate')
 const currentRateCheckbox = document.querySelector('#current-rate')
 const userRateCheckbox = document.querySelector('#user-rate')
 const userRateValue = document.querySelector('#user-rate-input')
@@ -81,7 +82,8 @@ const checkForm = () => {
 }
 
 const checkAmount = amount => {
-	const re = /(^[1-9]+0*|^0?).[0-9]{0,2}$/
+	const re = /(^[0-9]*).[0-9]{0,2}$/
+	// const re = /^([0-9]*([.,](?=[0-9]{3}))?[0-9]+)+((?!\2)[.,])?$/
 
 	if (amount.value >= 0.01 && re.test(amount.value)) {
 		amount.classList.remove('error')
@@ -104,7 +106,8 @@ const checkCurrency = () => {
 			console.log('inna waluta')
 		} else if (currentRateCheckbox.checked === true) {
 			errorValue.textContent = ''
-			calculateCurrency()
+			calculateCurrency(transactionCurrency.value, mainCurrency.value)
+			setTimeout(addNewTransaction, 1000)
 		}
 	} else {
 		addNewTransaction()
@@ -152,12 +155,12 @@ const exchangeMoney = () => {
 	addNewTransaction()
 }
 
-const calculateCurrency = () => {
+const calculateCurrency = (oneCurrency, twoCurrency) => {
 	fetch(
 		`https://api.getgeoapi.com/v2/currency/convert
 		?api_key=6843b0de6d14d7c6caf41af569de90135dd79aae
-		&from=${transactionCurrency.value}
-		&to=${mainCurrency.value}
+		&from=${oneCurrency}
+		&to=${twoCurrency}
 		&amount=${amountInput.value}
 		&format=json`
 	)
@@ -165,15 +168,15 @@ const calculateCurrency = () => {
 		.then(data => {
 			// console.log(object);
 			console.log(data)
-			const rate = data.rates[mainCurrency.value].rate
-			console.log(`1 ${transactionCurrency.value} = ${rate} ${mainCurrency.value}`)
+			const rate = data.rates[twoCurrency].rate
+			console.log(`1 ${oneCurrency} = ${rate} ${twoCurrency}`)
 			exchangedValue = amountInput.value * rate
 			console.log(exchangedValue)
 			// amountInput.value = exchangedValue
-			errorValue.textContent = `1 ${transactionCurrency.value} = ${rate} ${mainCurrency.value}`
+			errorValue.textContent = `1 ${oneCurrency} = ${rate} ${twoCurrency}`
+			rateInfo.textContent = `1 ${oneCurrency} = ${rate} ${twoCurrency}`
 			// amountInput.value = exchangedValue
 			console.log('calculateCurrency inside')
-			setTimeout(addNewTransaction, 1000)
 		})
 		.catch(error => {
 			console.error(error)
@@ -312,6 +315,7 @@ const checkClick = e => {
 
 // const changeCurrency = () =>
 // {
+// const amountToChange = transaction.lastElementChild.innerText
 
 // }
 const deleteTransaction = transactionToDelete => {
@@ -356,16 +360,27 @@ const setCheckbox = e => {
 
 const checkMainCurrency = () => {
 	allTransactions = document.getElementsByClassName('panel-transactions__list-transaction')
-	console.log(allTransactions.length)
-	console.log(allTransactions)
+
+	// calculateCurrency(selectedTransactionCurrency, mainCurrency.value)
+	rate = 4
 
 	if (allTransactions.length === 0) {
 		availableMoney.textContent = `0 ${mainCurrency.value}`
+	} else if (rate !== 'undefined') {
+		// 	changeCurrency()
+		// 	countMoney()
+		for (const transaction in allTransactions) {
+			if (allTransactions.hasOwnProperty(transaction)) {
+				const currentTransaction = allTransactions[transaction]
+				const transactionAmount = parseFloat(currentTransaction.lastElementChild.innerText)
+
+				const newAmount = transactionAmount * rate
+				console.log(newAmount)
+				selectedTransactionCurrency = currentTransaction.lastElementChild.innerText.slice(-3)
+				console.log(selectedTransactionCurrency)
+			}
+		}
 	}
-	// else{
-	// 	changeCurrency()
-	// 	countMoney()
-	// }
 }
 
 addBtn.addEventListener('click', openPopup)

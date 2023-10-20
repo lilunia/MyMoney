@@ -37,6 +37,8 @@ let selectedTransactionCurrency
 let rate
 let exchangedValue = 0
 let allTransactions
+let currentTransaction
+let transactionAmount
 
 const openPopup = () => {
 	selectedMainCurrency = mainCurrency.value
@@ -168,7 +170,7 @@ const calculateCurrency = (oneCurrency, twoCurrency) => {
 		.then(data => {
 			// console.log(object);
 			console.log(data)
-			const rate = data.rates[twoCurrency].rate
+			rate = data.rates[twoCurrency].rate
 			console.log(`1 ${oneCurrency} = ${rate} ${twoCurrency}`)
 			exchangedValue = amountInput.value * rate
 			console.log(exchangedValue)
@@ -181,6 +183,8 @@ const calculateCurrency = (oneCurrency, twoCurrency) => {
 		.catch(error => {
 			console.error(error)
 		})
+
+	return rate
 }
 
 const addNewTransaction = () => {
@@ -313,11 +317,6 @@ const checkClick = e => {
 	}
 }
 
-// const changeCurrency = () =>
-// {
-// const amountToChange = transaction.lastElementChild.innerText
-
-// }
 const deleteTransaction = transactionToDelete => {
 	const amountToDelete = parseFloat(transactionToDelete.lastElementChild.innerText)
 	const indexOfTransaction = moneyBalance.indexOf(amountToDelete)
@@ -361,25 +360,34 @@ const setCheckbox = e => {
 const checkMainCurrency = () => {
 	allTransactions = document.getElementsByClassName('panel-transactions__list-transaction')
 
-	// calculateCurrency(selectedTransactionCurrency, mainCurrency.value)
-	rate = 4
-
 	if (allTransactions.length === 0) {
 		availableMoney.textContent = `0 ${mainCurrency.value}`
-	} else if (rate !== 'undefined') {
-		// 	changeCurrency()
-		// 	countMoney()
-		for (const transaction in allTransactions) {
-			if (allTransactions.hasOwnProperty(transaction)) {
-				const currentTransaction = allTransactions[transaction]
-				const transactionAmount = parseFloat(currentTransaction.lastElementChild.innerText)
+	} else {
+		currentTransaction = allTransactions[0]
+		selectedTransactionCurrency = currentTransaction.lastElementChild.innerText.slice(-3)
+		console.log(selectedTransactionCurrency)
 
-				const newAmount = transactionAmount * rate
-				console.log(newAmount)
-				selectedTransactionCurrency = currentTransaction.lastElementChild.innerText.slice(-3)
-				console.log(selectedTransactionCurrency)
+		calculateCurrency(selectedTransactionCurrency, mainCurrency.value)
+		setTimeout(() => {
+			for (const transaction in allTransactions) {
+				if (allTransactions.hasOwnProperty(transaction)) {
+					currentTransaction = allTransactions[transaction]
+					transactionAmount = parseFloat(currentTransaction.lastElementChild.innerText)
+
+					const newAmount = parseFloat(transactionAmount * rate).toFixed(2)
+					console.log(newAmount)
+					currentTransaction.lastElementChild.innerHTML = `${newAmount}${mainCurrency.value}
+				<button class="panel-transactions__list-transaction-deleteBtn">
+					<span class="x-icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+							viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2"
+							stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+							<line x1="18" y1="6" x2="6" y2="18"></line>
+							<line x1="6" y1="6" x2="18" y2="18"></line>
+					</svg></span>
+				</button>`
+				}
 			}
-		}
+		}, 500)
 	}
 }
 

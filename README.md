@@ -80,3 +80,7 @@ Own project. Inspired by MMC School.
 ## Problems
 
 - when the number input contains an invalid value, I did try to retrieve the value, I got a blank string
+- without allTransactions.hasOwnProperty(transaction) in checkMainCurrency() -> Uncaught TypeError: currentTransaction.lastElementChild is undefined
+- in checkMainCurrency() I want to calculate Currency and then after receive an amount of rate I want to go to 
+changing values in transactions list -> use of setTimeout()
+- variable 'selectedTransactionCurrency' stores an info about transaction currency on the list on main panel -> currentTransaction.lastElementChild.innerText.slice(-3)

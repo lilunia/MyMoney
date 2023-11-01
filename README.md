@@ -9,6 +9,7 @@
 - [Screenshots](#screenshots)
 - [JavaScript properties and methods](#javaScript-properties-and-methods)
 - [Live](#live)
+- [Problems](#problems)
 
 ## General info
 

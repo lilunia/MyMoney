@@ -89,6 +89,7 @@ To run this project, you must have the following dependencies installed:
 - Git (https://git-scm.com)
 
 ```bash
+
 git clone https://github.com/lilunia/MyMoney.git
 
 ```

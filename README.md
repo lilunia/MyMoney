@@ -80,6 +80,19 @@ Own project. Inspired by MMC School.
 
 <a href="https://lilunia.github.io/MyMoney/">lilunia.github.io/MyMoney/</a>
 
+
+## Installation
+
+To run this project, you must have the following dependencies installed:
+
+- Git (https://git-scm.com)
+
+```bash
+git clone https://github.com/lilunia/MyMoney.git
+
+```
+
+
 ## Problems
 
 - when the number input contains an invalid value, I did try to retrieve the value, I got a blank string

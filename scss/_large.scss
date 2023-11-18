@@ -1,0 +1,55 @@
+@media (min-width: 992px) and (min-height: 768px) {
+	h2 {
+		font-size: 2.5rem;
+	}
+	h3 {
+		font-size: 2rem;
+	}
+	.panel {
+		max-width: 100rem;
+
+		&-info {
+			&__header {
+				&-text {
+					font-size: 1.25rem;
+				}
+				&-heading {
+					font-size: 2rem;
+				}
+			}
+			&__money {
+				&-available {
+					&-amount {
+						font-size: 5rem;
+					}
+				}
+
+				&-flows {
+					&-income,
+					&-expense {
+						&-heading {
+							margin-bottom: 1em;
+						}
+						&-amount {
+							font-size: 3rem;
+						}
+					}
+				}
+			}
+		}
+	}
+	.popup {
+		input, select{
+			font-size: 2rem;
+		}
+		&__form {
+			width: 80rem;
+		}
+
+		&__controls {
+			button {
+				font-size: 1.75rem;
+			}
+		}
+	}
+}

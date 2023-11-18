@@ -43,8 +43,8 @@ let transactionAmount
 allTransactions = document.getElementsByClassName('panel-transactions__list-transaction')
 
 const openPopup = () => {
-	selectedMainCurrency = mainCurrency.value
-	transactionCurrency.value = selectedMainCurrency
+	transactionCurrency.value = mainCurrency.value
+	errorValue.textContent = ''
 	popup.style.display = 'block'
 	popup.style.top = `+${window.scrollY}px`
 	document.body.style.overflow = 'hidden'
@@ -52,11 +52,8 @@ const openPopup = () => {
 const closePopup = () => {
 	nameInput.value = ''
 	amountInput.value = ''
-	category.value = 'none'
-	errorName.textContent = ''
-	errorValue.textContent = ''
-	errorCategory.textContent = ''
 	userRateValue.value = ''
+	category.value = 'none'
 	userRateCheckbox.checked = false
 	currentRateCheckbox.checked = false
 	userRateValue.disabled = true
@@ -77,6 +74,7 @@ const clearErrors = () => {
 }
 
 const checkForm = () => {
+	clearErrors()
 	if (nameInput.value.trim() !== '' && amountInput.value !== '' && category.value !== 'none') {
 		checkAmount(amountInput)
 		errorCategory.textContent = ''
@@ -87,13 +85,11 @@ const checkForm = () => {
 
 const checkAmount = amount => {
 	const re = /(^[0-9]*).[0-9]{0,2}$/
-	// const re = /^([0-9]*([.,](?=[0-9]{3}))?[0-9]+)+((?!\2)[.,])?$/
 
 	if (amount.value >= 0.01 && re.test(amount.value)) {
 		amount.classList.remove('error')
 		errorValue.textContent = ''
 		checkCurrency()
-		//console.log('checkAmount correct')
 	} else {
 		amount.classList.add('error')
 		errorValue.textContent = 'Please enter the correct value!'
@@ -102,7 +98,6 @@ const checkAmount = amount => {
 
 const checkCurrency = () => {
 	if (transactionCurrency.value !== mainCurrency.value) {
-		//console.log('another currency in checkCurrency')
 		errorValue.textContent = 'Please select current rate or enter your own rate!'
 		if (userRateCheckbox.checked === true) {
 			errorValue.textContent = ''
@@ -130,14 +125,12 @@ const checkboxStatus = () => {
 }
 
 const checkUserRate = () => {
-	//console.log('user rate')
 	if (userRateCheckbox.checked === true && userRateValue.value !== '') {
 		errorValue.textContent = ''
 		const re = /(^[0-9]?).[0-9]{2,4}$/
 		if (userRateValue.value >= 0.0001 && userRateValue.value < 10 && re.test(userRateValue.value)) {
 			userRateValue.classList.remove('error')
 			errorValue.textContent = ''
-			//console.log('correct value rate')
 			exchangeMoney()
 			addNewTransaction()
 		} else {
@@ -153,27 +146,18 @@ const checkUserRate = () => {
 const exchangeMoney = () => {
 	rate = userRateValue.value
 	exchangedValue = amountInput.value * rate
-	//console.log('inside exchange money')
 }
 
 const calculateCurrency = (oneCurrency, twoCurrency) => {
 	fetch(
-		`https://api.getgeoapi.com/v2/currency/convert
-		?api_key=6843b0de6d14d7c6caf41af569de90135dd79aae
-		&from=${oneCurrency}
-		&to=${twoCurrency}
-		&amount=${amountInput.value}
-		&format=json`
+		`https://api.getgeoapi.com/v2/currency/convert?api_key=6843b0de6d14d7c6caf41af569de90135dd79aae&from=${oneCurrency}&to=${twoCurrency}&amount=${amountInput.value}&format=json`
 	)
 		.then(res => res.json())
 		.then(data => {
-			console.log(data)
 			rate = data.rates[twoCurrency].rate
-			console.log(`1 ${oneCurrency} = ${rate} ${twoCurrency}`)
 			exchangedValue = amountInput.value * rate
 			errorValue.textContent = `1 ${oneCurrency} = ${rate} ${twoCurrency}`
 			rateInfo.textContent = `1 ${oneCurrency} = ${rate} ${twoCurrency}`
-			//console.log('inside calculateCurrency ')
 		})
 		.catch(error => {
 			console.error(error)
@@ -302,11 +286,9 @@ const countMoney = (money, income, expense) => {
 }
 
 const checkClick = e => {
-	if (e.target.classList.value !== 0) {
-		if (e.target.closest('button').classList.contains('panel-transactions__list-transaction-deleteBtn')) {
-			targetTransaction = e.target.closest('.panel-transactions__list-transaction')
-			deleteTransaction(targetTransaction)
-		}
+	if (e.target.closest('button').classList.contains('panel-transactions__list-transaction-deleteBtn')) {
+		targetTransaction = e.target.closest('.panel-transactions__list-transaction')
+		deleteTransaction(targetTransaction)
 	}
 }
 
@@ -372,9 +354,8 @@ const checkMainCurrency = () => {
 			income = [0]
 			for (const transaction in allTransactions) {
 				if (allTransactions.hasOwnProperty(transaction)) {
-					currentTransaction = allTransactions[transaction]
+					currentTransaction = allTransactions[transaction] 
 					transactionAmount = parseFloat(currentTransaction.lastElementChild.innerText)
-
 					const newAmount = parseFloat(transactionAmount * rate).toFixed(2)
 					currentTransaction.lastElementChild.innerHTML = `${newAmount} ${mainCurrency.value}
 				<button class="panel-transactions__list-transaction-deleteBtn">
@@ -399,10 +380,18 @@ const checkMainCurrency = () => {
 		}, 500)
 	}
 }
+const checkEnter = e => {
+	if (e.key === 'Enter') {
+		checkForm()
+	}
+}
 
 addBtn.addEventListener('click', openPopup)
 category.addEventListener('change', addIcon)
 saveBtn.addEventListener('click', checkForm)
+category.addEventListener('keyup', checkEnter)
+amountInput.addEventListener('keyup', checkEnter)
+userRateValue.addEventListener('keyup', checkEnter)
 cancelBtn.addEventListener('click', closePopup)
 deleteAllBtn.addEventListener('click', deleteAll)
 transactionsList.addEventListener('click', checkClick)

@@ -1,0 +1,44 @@
+
+@media (min-width: 768px) and (min-height: 768px) {
+	.x-icon,
+	.add-icon,
+	.delete-all-icon {
+		width: 1.75em;
+		height: 1.75em;
+	}
+	.panel {
+		&-transactions {
+			padding: 2em 6em;
+			&__controls {
+				button {
+					font-size: 1.5rem;
+				}
+			}
+
+			&__list {
+				&-transaction {
+					font-size: 2rem;
+				}
+			}
+		}
+		&-info {
+			&__header {
+				margin: 2em 3em 1em;
+				&-text {
+					font-size: 1.25rem;
+				}
+				&-heading {
+					font-size: 2rem;
+				}
+			}
+			&__money {
+				margin: 0 3em;
+				&-available {
+					&-amount {
+						font-size: 3rem;
+					}
+				}
+			}
+		}
+	}
+}

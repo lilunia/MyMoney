@@ -15,9 +15,7 @@
 
 This application allows to manage own finances in chosen currency (PLN, EUR, USD, GBP, CHF). Currency exchange is based on <a href = 'https://currency.getgeoapi.com/'>CURRENCY API</a>. 
 
-When 'add transaction' button is clicked popup window will appear. In this window need to be enter a name of transaction, an amount and select the transaction category. 
-The user can add new transaction in currency other than the main one. If currency of transaction need to be exchanged to main one, the user to do so can either choose current rate from API or enter his own rate. Transactions can be deleted either one by one or all of them at once.
-The amount of available money, income and expenses are constantly updated.
+When the 'Add Transaction' button is clicked, a pop-up window will appear. In this window it is necessary to enter a transaction name, an amount and select the transaction category. The user can add a new transaction in a currency different from the main one. If the currency of the transaction needs to be changed to the main currency, the user can either select the current rate from the API or enter their own rate. Transactions can be deleted either one by one or all at once. The amount of available money, income and expenses are constantly updated.
 
 MyMoney was written in english language.
 
@@ -98,7 +96,7 @@ git clone https://github.com/lilunia/MyMoney.git
 ## Problems
 
 - when the number input contains an invalid value, I did try to retrieve the value, I got a blank string
-- without allTransactions.hasOwnProperty(transaction) in checkMainCurrency() -> Uncaught TypeError: currentTransaction.lastElementChild is undefined
-- in checkMainCurrency() I want to calculate Currency and then after receive an amount of rate I want to go to
-  changing values in transactions list -> use of setTimeout()
-- variable 'selectedTransactionCurrency' stores an info about transaction currency on the list on main panel -> currentTransaction.lastElementChild.innerText.slice(-3)
+- without allTransactions.hasOwnProperty(transaction) in checkMainCurrency() -> Uncaught TypeError: currentTransaction.lastElementChild is undefined, iterate only over the keys of an object
+- in checkMainCurrency() I want to calculate Currency and then after receiving an amount of rate I want to go to
+  changing values in transaction list -> use of setTimeout()
+- variable 'selectedTransactionCurrency' stores an info about transaction currency in the list on the main panel -> currentTransaction.lastElementChild.innerText.slice(-3)

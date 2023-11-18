@@ -9,7 +9,6 @@ html {
 }
 
 body {
-  min-height: 100vh;
   font-family: "Titillium Web", sans-serif;
   background-color: #e5e5e5;
 }
@@ -18,7 +17,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
   width: 100%;
   min-height: 100vh;
 }
@@ -44,8 +42,8 @@ h3 {
   justify-content: center;
   align-items: center;
   margin-left: 0.5em;
-  height: 1.25em;
   width: 1.25em;
+  height: 1.25em;
 }
 
 .transaction-icon {
@@ -53,9 +51,8 @@ h3 {
 }
 
 .wallet-icon {
-  height: 1.5em;
   width: 1.5em;
-  color: #000;
+  height: 1.5em;
 }
 
 .panel {
@@ -63,7 +60,7 @@ h3 {
   flex-direction: column;
   margin: 1em;
   width: 100%;
-  max-width: 800px;
+  max-width: 80rem;
   border-radius: 1.5em;
   background-color: #fff;
   box-shadow: 0.5em 0.5em 1.5em grey;
@@ -75,17 +72,12 @@ h3 {
 }
 .panel-info__header {
   margin: 1em;
-  border-radius: 1.5em;
-  color: #000;
 }
 .panel-info__header-heading {
   display: flex;
   justify-content: start;
   align-items: center;
   font-size: 1.25rem;
-}
-.panel-info__header-text {
-  font-size: 1rem;
 }
 .panel-info__money {
   margin: 0 1em 1em;
@@ -124,8 +116,8 @@ h3 {
   flex-direction: column;
   padding: 1em;
   width: 100%;
-  border-radius: 1.5em;
   background-color: #fff;
+  border-radius: 1.5em;
 }
 .panel-transactions__info {
   display: flex;
@@ -149,7 +141,7 @@ h3 {
   margin-right: 1em;
 }
 .panel-transactions__info-currency-selection-select {
-  font: inherit;
+  font-family: inherit;
   font-size: 1.5rem;
   color: #226b54;
   background: none;
@@ -196,43 +188,32 @@ h3 {
   width: 100%;
 }
 .panel-transactions__controls button {
-  font-style: inherit;
-  width: 40%;
-  height: 3.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 1em 0.5em;
   padding: 0.5em 1em;
+  width: 45%;
+  height: 3.5em;
+  border: none;
   border-radius: 1em;
   font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 .panel-transactions__controls-add {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #3bb78f;
-  border: 0.063rem solid #3bb78f;
   color: #fff;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  background-color: #3bb78f;
 }
 .panel-transactions__controls-delete-all {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f4a261;
-  border: 0.063rem solid #f4a261;
   color: #000;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  background-color: #f4a261;
 }
 .panel-transactions__controls-add:hover {
   background-color: #226b54;
-  border: 0.063rem solid #226b54;
-  color: #fff;
 }
 .panel-transactions__controls-delete-all:hover {
   background-color: #d08c55;
-  border: 0.063rem solid #f4a261;
-  color: #000;
 }
 
 .income {
@@ -262,71 +243,34 @@ h3 {
   background-color: #fff;
   border-radius: 1.5em;
 }
-.popup__form label {
-  font-size: 1rem;
-}
-.popup__form input#name,
-.popup__form select#category,
-.popup__form input#user-rate-input {
+.popup__form input,
+.popup__form select {
   padding: 0.5em 1em;
   width: 100%;
   background: none;
   border: none;
   border-bottom: 0.125em solid #ddd;
-  font: inherit;
+  font-family: inherit;
   font-size: 1.5rem;
 }
-.popup__form input#user-rate-input {
-  width: 30%;
-}
-.popup__form input#current-rate,
-.popup__form input#user-rate {
-  margin: 0.125em;
-}
-.popup__form select#category {
-  color: grey;
-}
 .popup__form-heading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   margin: 0.5em 0;
 }
 .popup__form-box {
-  display: flex;
-  justify-content: center;
-  align-items: start;
-  flex-direction: column;
   margin: 0 auto;
   padding: 0 2em;
   width: 100%;
 }
-.popup__form-box-amount {
-  display: flex;
-  justify-content: center;
-  align-items: start;
-  flex-direction: column;
-  width: 100%;
-}
 .popup__form-box-amount-input {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   width: 100%;
 }
-.popup__form-box-amount-input-inside, .popup__form-box-amount-input-selection {
-  padding: 0.5em 1em;
-  border: none;
-  border-bottom: 0.125em solid #ddd;
-}
-.popup__form-box-amount-input-inside {
+.popup__form-box-amount-input input {
   margin-right: 1em;
   width: 70%;
 }
-.popup__form-box-amount-input-selection {
+.popup__form-box-amount-input select {
   width: 30%;
-  background: none;
-  font: inherit;
 }
 .popup__form-box-amount-checkbox {
   display: flex;
@@ -335,44 +279,46 @@ h3 {
   margin-top: 1em;
   width: 100%;
 }
+.popup__form-box-amount-checkbox input {
+  width: 30%;
+}
+.popup__form-box-amount-checkbox label {
+  margin-left: 0.25em;
+}
 .popup__form-box-amount-checkbox-current, .popup__form-box-amount-checkbox-user {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 30%;
+  width: 35%;
 }
-.popup__form-box-amount-checkbox label {
-  margin-bottom: 0;
+.popup__form-box-amount-checkbox-current input, .popup__form-box-amount-checkbox-user input {
+  width: 20%;
 }
 .popup__controls {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 80%;
+  width: 90%;
 }
 .popup__controls button {
-  padding: 0.5em 1em;
   margin: 1em;
-  width: 50%;
+  padding: 0.5em 1em;
+  width: 45%;
   border-radius: 1em;
   border: none;
   font-size: 1.25rem;
   font-family: inherit;
-}
-.popup__controls-save {
-  background-color: #3bb78f;
-  color: #fff;
   cursor: pointer;
   transition: background-color 0.3s;
+}
+.popup__controls-save {
+  color: #fff;
+  background-color: #3bb78f;
 }
 .popup__controls-save:hover {
   background-color: #226b54;
 }
 .popup__controls-cancel {
-  background-color: #f4a261;
   color: #000;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  background-color: #f4a261;
 }
 .popup__controls-cancel:hover {
   background: #d08c55;
@@ -394,17 +340,11 @@ h3 {
   .panel-transactions {
     padding: 2em 4em;
   }
-  .panel-info__header {
-    margin: 2em 2em 1em;
-  }
-  .panel-info__money {
-    margin: 0 2em 2em;
-  }
-  .panel-info__money-flows-income-amount, .panel-info__money-flows-expense-amount {
-    font-size: 2rem;
-  }
   .popup__form {
     width: 50rem;
+  }
+  .popup__form label {
+    font-size: 1.5rem;
   }
 }
 @media (min-width: 576px) and (min-height: 768px) {
@@ -422,7 +362,7 @@ h3 {
     justify-content: center;
     grid-column: 2/4;
     grid-row: 1/2;
-    margin: 0.3em 0;
+    margin: 0.25em 0;
   }
   .panel-transactions__info-currency {
     display: grid;
@@ -431,7 +371,7 @@ h3 {
   }
   .panel-transactions__info-currency-selection {
     grid-row: 1/2;
-    margin: 0.3em 0;
+    margin: 0.25em 0;
   }
   .panel-transactions__info-currency-rate {
     font-size: 1.5rem;
@@ -439,29 +379,37 @@ h3 {
   .panel-transactions__controls button {
     margin: 2em;
   }
-  .panel-info__money-available-amount {
-    font-size: 3rem;
+  .panel-info__header {
+    margin: 2em 2em 1em;
   }
   .panel-info__header-heading {
     font-size: 1.5rem;
   }
+  .panel-info__money {
+    margin: 0 2em 2em;
+  }
+  .panel-info__money-available-amount {
+    font-size: 3rem;
+  }
+  .panel-info__money-flows-income-amount, .panel-info__money-flows-expense-amount {
+    font-size: 2rem;
+  }
   .popup__form {
     width: 50rem;
   }
-  .popup__form input#current-rate,
-  .popup__form input#user-rate {
-    margin: 0.75em;
+  .popup label {
+    font-size: 1.5rem;
   }
 }
 @media (min-width: 768px) and (min-height: 768px) {
   .x-icon,
   .add-icon,
   .delete-all-icon {
-    height: 1.75em;
     width: 1.75em;
+    height: 1.75em;
   }
   .panel-transactions {
-    padding: 2em 5em;
+    padding: 2em 6em;
   }
   .panel-transactions__controls button {
     font-size: 1.5rem;
@@ -510,16 +458,11 @@ h3 {
   .panel-info__money-flows-income-amount, .panel-info__money-flows-expense-amount {
     font-size: 3rem;
   }
+  .popup input, .popup select {
+    font-size: 2rem;
+  }
   .popup__form {
-    width: 800px;
-  }
-  .popup label {
-    font-size: 1.5rem;
-  }
-  .popup input,
-  .popup select {
-    padding: 0.75em;
-    font-size: 1.5rem;
+    width: 80rem;
   }
   .popup__controls button {
     font-size: 1.75rem;

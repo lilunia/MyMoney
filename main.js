@@ -127,7 +127,7 @@ const checkboxStatus = () => {
 const checkUserRate = () => {
 	if (userRateCheckbox.checked === true && userRateValue.value !== '') {
 		errorValue.textContent = ''
-		const re = /(^[0-9]?).[0-9]{2,4}$/
+		const re = /(^[0-9]?).[0-9]{0,4}$/
 		if (userRateValue.value >= 0.0001 && userRateValue.value < 10 && re.test(userRateValue.value)) {
 			userRateValue.classList.remove('error')
 			errorValue.textContent = ''

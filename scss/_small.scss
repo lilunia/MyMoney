@@ -1,3 +1,12 @@
+@media (min-width: 320px) {
+	.popup {
+			input,
+			select {
+		
+				font-size: 1.25rem;
+			}
+		}
+}
 @media (min-width: 576px) {
 	.panel {
 		&-transactions {
@@ -6,6 +15,7 @@
 	}
 	.popup {
 		&__form {
+			padding: 1em;
 			width: 50rem;
 
 			label {
@@ -74,14 +84,6 @@
 					}
 				}
 			}
-		}
-	}
-	.popup {
-		&__form {
-			width: 50rem;
-		}
-		label {
-			font-size: 1.5rem;
 		}
 	}
 }

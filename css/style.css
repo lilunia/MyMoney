@@ -225,6 +225,7 @@ h3 {
   position: absolute;
   top: 0;
   left: 0;
+  bottom: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.65);
@@ -238,7 +239,7 @@ h3 {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 1em;
+  padding: 0.5em;
   width: 90%;
   background-color: #fff;
   border-radius: 1.5em;
@@ -251,14 +252,14 @@ h3 {
   border: none;
   border-bottom: 0.125em solid #ddd;
   font-family: inherit;
-  font-size: 1.5rem;
+  font-size: 0.75rem;
 }
 .popup__form-heading {
   margin: 0.5em 0;
 }
 .popup__form-box {
   margin: 0 auto;
-  padding: 0 2em;
+  padding: 0 1em;
   width: 100%;
 }
 .popup__form-box-amount-input {
@@ -336,11 +337,18 @@ h3 {
   box-shadow: 0 0 0.5em red;
 }
 
+@media (min-width: 320px) {
+  .popup input,
+  .popup select {
+    font-size: 1.25rem;
+  }
+}
 @media (min-width: 576px) {
   .panel-transactions {
     padding: 2em 4em;
   }
   .popup__form {
+    padding: 1em;
     width: 50rem;
   }
   .popup__form label {
@@ -394,12 +402,6 @@ h3 {
   .panel-info__money-flows-income-amount, .panel-info__money-flows-expense-amount {
     font-size: 2rem;
   }
-  .popup__form {
-    width: 50rem;
-  }
-  .popup label {
-    font-size: 1.5rem;
-  }
 }
 @media (min-width: 768px) and (min-height: 768px) {
   .x-icon,
@@ -431,6 +433,15 @@ h3 {
   }
   .panel-info__money-available-amount {
     font-size: 3rem;
+  }
+  .popup__form {
+    padding: 3em;
+  }
+  .popup__form-box {
+    margin-bottom: 2em;
+  }
+  .popup__form label {
+    font-size: 2rem;
   }
 }
 @media (min-width: 992px) and (min-height: 768px) {

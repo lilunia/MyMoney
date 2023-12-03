@@ -204,6 +204,11 @@ const createNewTransaction = () => {
 	moneyBalance.push(parseFloat(amountInput.value))
 	countMoney(moneyBalance, income, expense)
 	id++
+
+	localStorage.setItem('list', JSON.stringify(transactionsList.innerHTML))
+	localStorage.setItem('expensetab', JSON.stringify(expense))
+	localStorage.setItem('incometab', JSON.stringify(income))
+	localStorage.setItem('balancetab', JSON.stringify(moneyBalance))
 }
 
 const addIcon = selectedCategory => {
@@ -283,6 +288,10 @@ const countMoney = (money, income, expense) => {
 	availableMoney.textContent = `${sum} ${mainCurrency.value}`
 	incomeAmount.textContent = `${sumIncome} ${mainCurrency.value}`
 	expenseAmount.textContent = `${sumExpense} ${mainCurrency.value}`
+
+	localStorage.setItem('availableMoney', availableMoney.textContent)
+	localStorage.setItem('incomeAmount', incomeAmount.textContent)
+	localStorage.setItem('expenseAmount', expenseAmount.textContent)
 }
 
 const checkClick = e => {
@@ -322,6 +331,13 @@ const deleteAll = () => {
 	moneyBalance = [0]
 	expense = [0]
 	income = [0]
+	localStorage.setItem('list', transactionsList.innerHTML)
+	localStorage.setItem('expensetab', expense)
+	localStorage.setItem('incometab', income)
+	localStorage.setItem('balancetab', moneyBalance)
+	localStorage.setItem('availableMoney', availableMoney.textContent)
+	localStorage.setItem('incomeAmount', incomeAmount.textContent)
+	localStorage.setItem('expenseAmount', expenseAmount.textContent)
 }
 
 const setCheckbox = e => {
@@ -354,7 +370,7 @@ const checkMainCurrency = () => {
 			income = [0]
 			for (const transaction in allTransactions) {
 				if (allTransactions.hasOwnProperty(transaction)) {
-					currentTransaction = allTransactions[transaction] 
+					currentTransaction = allTransactions[transaction]
 					transactionAmount = parseFloat(currentTransaction.lastElementChild.innerText)
 					const newAmount = parseFloat(transactionAmount * rate).toFixed(2)
 					currentTransaction.lastElementChild.innerHTML = `${newAmount} ${mainCurrency.value}
@@ -375,6 +391,10 @@ const checkMainCurrency = () => {
 
 					moneyBalance.push(parseFloat(newAmount))
 					countMoney(moneyBalance, income, expense)
+					localStorage.setItem('list', JSON.stringify(transactionsList.innerHTML))
+					localStorage.setItem('expensetab', JSON.stringify(expense))
+					localStorage.setItem('incometab', JSON.stringify(income))
+					localStorage.setItem('balancetab', JSON.stringify(moneyBalance))
 				}
 			}
 		}, 500)
@@ -397,6 +417,17 @@ deleteAllBtn.addEventListener('click', deleteAll)
 transactionsList.addEventListener('click', checkClick)
 transactionCurrency.addEventListener('change', checkboxStatus)
 mainCurrency.addEventListener('change', checkMainCurrency)
-
 userRateCheckbox.addEventListener('click', setCheckbox)
 currentRateCheckbox.addEventListener('click', setCheckbox)
+
+window.addEventListener('load', () => {
+	if (localStorage.getItem('list') !== '') {
+		transactionsList.innerHTML = JSON.parse(localStorage.getItem('list'))
+	}
+	moneyBalance = JSON.parse(localStorage.getItem('balancetab'))
+	expense = JSON.parse(localStorage.getItem('expensetab'))
+	income = JSON.parse(localStorage.getItem('incometab'))
+	availableMoney.textContent = localStorage.getItem('availableMoney')
+	incomeAmount.textContent = localStorage.getItem('incomeAmount')
+	expenseAmount.textContent = localStorage.getItem('expenseAmount')
+})

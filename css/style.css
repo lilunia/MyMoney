@@ -9,6 +9,7 @@ html {
 }
 
 body {
+  min-height: 100vh;
   font-family: "Titillium Web", sans-serif;
   background-color: #e5e5e5;
 }
@@ -231,7 +232,7 @@ h3 {
   background-color: rgba(0, 0, 0, 0.65);
 }
 .popup__form {
-  position: absolute;
+  position: relative;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

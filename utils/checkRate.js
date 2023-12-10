@@ -34,7 +34,8 @@ export const calculateCurrency = (oneCurrency, twoCurrency) => {
 		.then(res => res.json())
 		.then(data => {
 			rate = data.rates[twoCurrency].rate
-			exchangedValue = amountInput.value * rate
+			rate = parseFloat(rate).toFixed(3)
+			exchangedValue = parseFloat(amountInput.value * rate).toFixed(2)
 			errorValue.textContent = `1 ${oneCurrency} = ${rate} ${twoCurrency}`
 			rateInfo.textContent = `1 ${oneCurrency} = ${rate} ${twoCurrency}`
 		})

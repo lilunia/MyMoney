@@ -11,6 +11,7 @@ import {
 } from '../main.js'
 import { calculateCurrency, rate } from './checkRate.js'
 import { countMoney } from './countMoney.js'
+import { setArrayStorage, setTextStorage } from './memoryStorage.js'
 
 let currentTransaction
 let selectedTransactionCurrency
@@ -21,9 +22,7 @@ export const checkMainCurrency = () => {
 		availableMoney.textContent = `0 ${mainCurrency.value}`
 		incomeAmount.textContent = `0.00 ${mainCurrency.value}`
 		expenseAmount.textContent = `0.00 ${mainCurrency.value}`
-		localStorage.setItem('availableMoney', availableMoney.textContent)
-		localStorage.setItem('incomeAmount', incomeAmount.textContent)
-		localStorage.setItem('expenseAmount', expenseAmount.textContent)
+		setTextStorage()
 	} else {
 		currentTransaction = allTransactions[0]
 		selectedTransactionCurrency = currentTransaction.lastElementChild.innerText.slice(-3)
@@ -56,10 +55,7 @@ export const checkMainCurrency = () => {
 
 					moneyBalance.push(parseFloat(newAmount))
 					countMoney(moneyBalance, income, expense)
-					localStorage.setItem('list', JSON.stringify(transactionsList.innerHTML))
-					localStorage.setItem('expensetab', JSON.stringify(expense))
-					localStorage.setItem('incometab', JSON.stringify(income))
-					localStorage.setItem('balancetab', JSON.stringify(moneyBalance))
+					setArrayStorage()
 				}
 			}
 		}, 500)

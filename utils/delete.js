@@ -1,5 +1,4 @@
 import {
-	allTransactions,
 	transactionsList,
 	availableMoney,
 	mainCurrency,
@@ -8,9 +7,10 @@ import {
 	rateInfo,
 	moneyBalance,
 	income,
-	expense,
+	expense
 } from '../main.js'
 import { countMoney } from './countMoney.js'
+import { setArrayStorage, setTextStorage } from './memoryStorage.js'
 
 export const deleteTransaction = transactionToDelete => {
 	const amountToDelete = parseFloat(transactionToDelete.lastElementChild.innerText)
@@ -27,40 +27,29 @@ export const deleteTransaction = transactionToDelete => {
 	transactionToDelete.remove()
 	countMoney(moneyBalance, income, expense)
 
-	if (allTransactions.length === 0) {
-		availableMoney.textContent = `0 ${mainCurrency.value}`
-		rateInfo.textContent = ''
-		transactionsList.innerHTML = ''
-		availableMoney.textContent = `0 ${mainCurrency.value}`
-		incomeAmount.textContent = `0.00 ${mainCurrency.value}`
-		expenseAmount.textContent = `0.00 ${mainCurrency.value}`
-		moneyBalance.splice(1, moneyBalance.length)
-		income.splice(1, income.length)
-		expense.splice(1, expense.length)
+	if (transactionsList.length === 0) {
+		resetTextValues()
+		resetBalance()
 	}
-	localStorage.setItem('list', JSON.stringify(transactionsList.innerHTML))
-	localStorage.setItem('expensetab', JSON.stringify(expense))
-	localStorage.setItem('incometab', JSON.stringify(income))
-	localStorage.setItem('balancetab', JSON.stringify(moneyBalance))
-	localStorage.setItem('availableMoney', availableMoney.textContent)
-	localStorage.setItem('incomeAmount', incomeAmount.textContent)
-	localStorage.setItem('expenseAmount', expenseAmount.textContent)
+	setArrayStorage()
+	setTextStorage()
 }
 
 export const deleteAll = () => {
+	resetTextValues()
+	resetBalance()
+	setArrayStorage()
+	setTextStorage()
+}
+const resetTextValues = () => {
+	rateInfo.textContent = ''
 	transactionsList.innerHTML = ''
 	availableMoney.textContent = `0 ${mainCurrency.value}`
 	incomeAmount.textContent = `0.00 ${mainCurrency.value}`
 	expenseAmount.textContent = `0.00 ${mainCurrency.value}`
-	rateInfo.textContent = ''
+}
+const resetBalance = () => {
 	moneyBalance.splice(1, moneyBalance.length)
 	income.splice(1, income.length)
 	expense.splice(1, expense.length)
-	localStorage.setItem('list', JSON.stringify(transactionsList.innerHTML))
-	localStorage.setItem('expensetab', JSON.stringify(expense))
-	localStorage.setItem('incometab', JSON.stringify(income))
-	localStorage.setItem('balancetab', JSON.stringify(moneyBalance))
-	localStorage.setItem('availableMoney', availableMoney.textContent)
-	localStorage.setItem('incomeAmount', incomeAmount.textContent)
-	localStorage.setItem('expenseAmount', expenseAmount.textContent)
 }

@@ -13,6 +13,7 @@ import { closePopup } from './popup.js'
 import { countMoney } from './countMoney.js'
 import { addIcon, categoryIcon } from './icons.js'
 import { exchangedValue } from './checkRate.js'
+import { setArrayStorage} from './memoryStorage.js'
 
 let selectedCategory
 let id = 0
@@ -56,10 +57,5 @@ const createNewTransaction = () => {
 	moneyBalance.push(parseFloat(amountInput.value))
 	countMoney(moneyBalance, income, expense)
 	id++
-
-	localStorage.setItem('list', JSON.stringify(transactionsList.innerHTML))
-	localStorage.setItem('expensetab', JSON.stringify(expense))
-	localStorage.setItem('incometab', JSON.stringify(income))
-	localStorage.setItem('balancetab', JSON.stringify(moneyBalance))
+	setArrayStorage()
 }
-

@@ -5,15 +5,16 @@ import { deleteAll } from './utils/delete.js'
 import { checkMainCurrency } from './utils/checkMainCurrency.js'
 import { checkboxStatus, setCheckbox } from './utils/checkboxes.js'
 import { addIcon } from './utils/icons.js'
+import { getTextStorage, setArrayStorage, setTextStorage } from './utils/memoryStorage.js'
 
 const addBtn = document.querySelector('.panel-transactions__controls-add')
 const deleteAllBtn = document.querySelector('.panel-transactions__controls-delete-all')
 const saveBtn = document.querySelector('.popup__controls-save')
 const cancelBtn = document.querySelector('.popup__controls-cancel')
+const availableMoney = document.querySelector('.panel-info__money-available-amount')
+const incomeAmount = document.querySelector('.panel-info__money-flows-income-amount')
+const expenseAmount = document.querySelector('.panel-info__money-flows-expense-amount')
 export const transactionsList = document.querySelector('.panel-transactions__list')
-export const availableMoney = document.querySelector('.panel-info__money-available-amount')
-export const incomeAmount = document.querySelector('.panel-info__money-flows-income-amount')
-export const expenseAmount = document.querySelector('.panel-info__money-flows-expense-amount')
 export const nameInput = document.querySelector('#name')
 export const amountInput = document.querySelector('#amount')
 export const category = document.querySelector('#category')
@@ -27,14 +28,14 @@ export const userRateValue = document.querySelector('#user-rate-input')
 export const transactionCurrency = document.querySelector('#popup-currency')
 export const mainCurrency = document.querySelector('#panel-currency')
 
-export let targetTransaction
 export let allTransactions
+export let targetTransaction
 export let transactionAmount
 let moneyBalance = [0]
 let expense = [0]
 let income = [0]
 export { moneyBalance, expense, income }
-
+export { availableMoney, incomeAmount, expenseAmount }
 allTransactions = document.getElementsByClassName('panel-transactions__list-transaction')
 
 addBtn.addEventListener('click', openPopup)
@@ -52,13 +53,15 @@ userRateCheckbox.addEventListener('click', setCheckbox)
 currentRateCheckbox.addEventListener('click', setCheckbox)
 
 window.addEventListener('load', () => {
-	if (localStorage.getItem('list') !== '') {
+	if (localStorage.getItem('list')) {
 		transactionsList.innerHTML = JSON.parse(localStorage.getItem('list'))
-		moneyBalance = JSON.parse(localStorage.getItem('balancetab'))
-		expense = JSON.parse(localStorage.getItem('expensetab'))
-		income = JSON.parse(localStorage.getItem('incometab'))
+		moneyBalance = JSON.parse(localStorage.getItem('balanceArr'))
+		expense = JSON.parse(localStorage.getItem('expenseArr'))
+		income = JSON.parse(localStorage.getItem('incomeArr'))
+		getTextStorage()
 	}
-	availableMoney.textContent = localStorage.getItem('availableMoney')
-	incomeAmount.textContent = localStorage.getItem('incomeAmount')
-	expenseAmount.textContent = localStorage.getItem('expenseAmount')
+	if (transactionsList.length === 0){
+		setTextStorage()
+		setArrayStorage()
+	}
 })

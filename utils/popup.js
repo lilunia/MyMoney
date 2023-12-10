@@ -10,7 +10,6 @@ import {
 	userRateCheckbox,
 	currentRateCheckbox,
 } from '../main.js'
-
 import { clearErrors } from './errors.js'
 
 export const openPopup = () => {

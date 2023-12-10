@@ -1,5 +1,4 @@
 import { userRateCheckbox, userRateValue, errorValue, rateInfo, amountInput } from '../main.js'
-// import { amountInput } from './icons.js'
 import { addNewTransaction } from './newTransaction.js'
 let rate
 let exchangedValue = 0

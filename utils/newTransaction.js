@@ -63,4 +63,3 @@ const createNewTransaction = () => {
 	localStorage.setItem('balancetab', JSON.stringify(moneyBalance))
 }
 
-export { moneyBalance, income, expense }

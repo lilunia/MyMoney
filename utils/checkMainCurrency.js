@@ -5,8 +5,10 @@ import {
 	incomeAmount,
 	expenseAmount,
 	mainCurrency,
+	moneyBalance,
+	income,
+	expense,
 } from '../main.js'
-import { moneyBalance, income, expense } from '../main.js'
 import { calculateCurrency, rate } from './checkRate.js'
 import { countMoney } from './countMoney.js'
 

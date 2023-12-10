@@ -1,7 +1,6 @@
 import { errorValue, transactionCurrency, mainCurrency, userRateCheckbox, currentRateCheckbox } from '../main.js'
-import { checkUserRate } from './checkRate.js'
+import { checkUserRate, calculateCurrency } from './checkRate.js'
 import { addNewTransaction } from './newTransaction.js'
-import { calculateCurrency } from './checkRate.js'
 
 export const checkAmount = amount => {
 	const re = /(^[0-9]*).[0-9]{0,2}$/

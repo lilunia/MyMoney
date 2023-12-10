@@ -74,6 +74,7 @@ Own project. Inspired by MMC School.
 - textContent
 - document.querySelector
 - addEventListener
+- Storage: setItem(), getItem()
 
 ## Live
 

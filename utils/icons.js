@@ -71,4 +71,3 @@ export const addIcon = selectedCategory => {
 	}
 }
 export { categoryIcon }
-// export { categoryIcon, amountInput }

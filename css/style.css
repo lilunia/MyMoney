@@ -147,6 +147,7 @@ h3 {
   color: #226b54;
   background: none;
   border: none;
+  cursor: pointer;
 }
 .panel-transactions__info-currency-rate {
   grid-row: 2/3;

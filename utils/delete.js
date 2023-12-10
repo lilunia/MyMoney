@@ -6,8 +6,10 @@ import {
 	incomeAmount,
 	expenseAmount,
 	rateInfo,
+	moneyBalance,
+	income,
+	expense,
 } from '../main.js'
-import { moneyBalance, income, expense } from '../main.js'
 import { countMoney } from './countMoney.js'
 
 export const deleteTransaction = transactionToDelete => {
@@ -35,13 +37,6 @@ export const deleteTransaction = transactionToDelete => {
 		moneyBalance.splice(1, moneyBalance.length)
 		income.splice(1, income.length)
 		expense.splice(1, expense.length)
-		// localStorage.setItem('list', transactionsList.innerHTML)
-		// localStorage.setItem('expensetab', expense)
-		// localStorage.setItem('incometab', income)
-		// localStorage.setItem('balancetab', moneyBalance)
-		// localStorage.setItem('availableMoney', availableMoney.textContent)
-		// localStorage.setItem('incomeAmount', incomeAmount.textContent)
-		// localStorage.setItem('expenseAmount', expenseAmount.textContent)
 	}
 	localStorage.setItem('list', JSON.stringify(transactionsList.innerHTML))
 	localStorage.setItem('expensetab', JSON.stringify(expense))
@@ -69,4 +64,3 @@ export const deleteAll = () => {
 	localStorage.setItem('incomeAmount', incomeAmount.textContent)
 	localStorage.setItem('expenseAmount', expenseAmount.textContent)
 }
-export { moneyBalance, income, expense }

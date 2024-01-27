@@ -1,3 +1,5 @@
+## Live
+<a href="https://lilunia.github.io/MyMoney/">lilunia.github.io/MyMoney/</a>
 <img src="./img/mymoney.PNG" width= "100%" height= "100%" alt="Screen Shot">
 
 # MyMoney
@@ -75,10 +77,6 @@ Own project. Inspired by MMC School.
 - document.querySelector
 - addEventListener
 - Storage: setItem(), getItem()
-
-## Live
-
-<a href="https://lilunia.github.io/MyMoney/">lilunia.github.io/MyMoney/</a>
 
 
 ## Installation

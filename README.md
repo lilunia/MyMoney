@@ -1,8 +1,8 @@
 ## Live
 <a href="https://lilunia.github.io/MyMoney/">lilunia.github.io/MyMoney/</a>
-<img src="./img/mymoney.PNG" width= "100%" height= "100%" alt="Screen Shot">
 
 # MyMoney
+<img src="./img/mymoney.PNG" width= "100%" height= "100%" alt="Screen Shot">
 
 ## Table of contents
 
